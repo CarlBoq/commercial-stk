@@ -39,7 +39,7 @@ export function WhyChoose() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
             <div key={index} className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary to-cyan-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                 <reason.icon className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-bold text-foreground text-xl">

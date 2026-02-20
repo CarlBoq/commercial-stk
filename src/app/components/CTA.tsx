@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function CTA() {
   return (
-    <section className="py-24 bg-gradient-to-br from-primary to-cyan-600 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-primary to-blue-500 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1688413709025-5f085266935a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdlb21ldHJpYyUyMHBhdHRlcm4lMjBiYWNrZ3JvdW5kfGVufDF8fHx8MTc3MTQ2MTU2NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')] opacity-10 bg-cover bg-center" />
       
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">

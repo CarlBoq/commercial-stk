@@ -1,8 +1,9 @@
-import { Clock, Twitter, Linkedin, Facebook } from "lucide-react";
+import { Twitter, Linkedin, Facebook } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Footer() {
   const navigate = useNavigate();
+  const brandLogoSrc = `${import.meta.env.BASE_URL}assets/sparkle-logo.png`;
   // For Pricing scroll: always navigate to Home, then scroll to #pricing
   const handlePricingClick = (e) => {
     e.preventDefault();
@@ -22,19 +23,13 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <Link
-                to="/"
-                className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center"
-                aria-label="Home"
-              >
-                <Clock className="w-6 h-6 text-white" />
-              </Link>
-              <Link
-                to="/"
-                className="text-xl font-semibold text-white hover:text-white transition-colors"
-              >
-                Sparkle Timekeeping
+            <div className="mb-4">
+              <Link to="/" aria-label="Home">
+                <img
+                  src={brandLogoSrc}
+                  alt="Sparkle Timekeeping"
+                  className="h-auto w-[220px] sm:w-[280px] object-contain"
+                />
               </Link>
             </div>
             <p className="text-white/70 leading-relaxed mb-6">

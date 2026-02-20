@@ -27,7 +27,7 @@ export default function App() {
       <ScrollToTop />
       <div className="min-h-screen bg-background overflow-x-hidden">
         <Navbar />
-        <main>
+        <main className="pt-24 sm:pt-28 md:pt-32">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />

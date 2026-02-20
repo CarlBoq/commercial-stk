@@ -1,172 +1,230 @@
-import React from "react";
+import React, { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
-// Pricing plans data
 const plans = [
   {
-    name: "Basic",
-    price: "$4",
+    name: "Starter Plan",
+    price: "PHP 19",
     period: "per employee/month",
-    audience: "For small teams and startups",
+    audience: "For growing teams that need payroll-ready accuracy",
     features: [
-      "Employee time tracking",
-      "Basic attendance management",
-      "Mobile & web access",
-      "Email support",
-      "Basic reporting",
-      "Up to 50 employees",
-      "My Schedule"
+      "Digital clock-in / clock-out",
+      "Selfie with timestamp",
+      "GPS & geo-fencing",
+      "Attendance creation",
+      "Basic attendance & breaklist reports",
+      "CSV report extraction",
+      "Biometric-ready",
+      "Payroll computation",
+      "Payroll-ready DTR",
+      "Payslip generation",
+      "Premium hours submissions (OT, NSD, RD)",
+      "Automated premium pay and additional allowances computation",
+      "Technical support",
     ],
-    unique: "Ideal for teams just starting with digital timekeeping."
+    unique: "Built for reliable attendance-to-payroll workflows.",
   },
   {
-    name: "Standard",
-    price: "$8",
+    name: "Growth Plan",
+    price: "PHP 29",
     period: "per employee/month",
-    audience: "For growing businesses and HR teams",
+    audience: "Most Popular",
     features: [
-      "Everything in Basic",
-      "Advanced scheduling",
-      "Overtime & holiday tracking",
-      "Custom reports & analytics",
-      "Priority support",
-      "Unlimited employees",
-      "Payroll integration",
-      "Manager approvals",
-      "My Schedule Cost"
+      "Digital clock-in / clock-out",
+      "Selfie with timestamp",
+      "GPS & geo-fencing",
+      "Attendance creation",
+      "Basic attendance & breaklist reports",
+      "CSV report extraction",
+      "Biometric-ready",
+      "Payroll computation",
+      "Payroll-ready DTR",
+      "Payslip generation",
+      "Technical support",
+      "Premium hours submissions (OT, NSD, RD)",
+      "Automated premium pay and additional allowances computation",
+      "Schedule confirmation & shift management",
+      "201 employee file management",
     ],
-    unique: "Includes cost forecasting and advanced analytics for scaling teams."
+    unique: "Best for teams scaling workforce visibility and controls.",
   },
   {
-    name: "Premium",
-    price: "$12",
+    name: "Enterprise Plan",
+    price: "PHP 49",
     period: "per employee/month",
-    audience: "For enterprises and complex organizations",
+    audience: "For advanced workforce and payroll operations",
     features: [
-      "Everything in Standard",
-      "Advanced analytics & forecasting",
-      "Custom integrations",
-      "Dedicated account manager",
-      "24/7 phone support",
-      "SSO & advanced security",
-      "Compliance management",
-      "API access",
-      "Custom training",
-      "Premium Values"
+      "Digital clock-in / clock-out",
+      "Selfie with timestamp",
+      "GPS & geo-fencing",
+      "Attendance creation",
+      "Basic attendance & breaklist reports",
+      "CSV report extraction",
+      "Biometric-ready",
+      "Payroll computation",
+      "Payroll-ready DTR",
+      "Payslip generation",
+      "Technical support",
+      "Schedule confirmation & shift management",
+      "Premium hours submissions (OT, NSD, RD)",
+      "Automated premium pay and additional allowances computation",
+      "201 employee file management",
+      "Company tools (Profile, Code of Conduct, Company videos)",
+      "Training videos & module management",
+      "Multi-process request management",
+      "Advanced & FGI report extraction",
+      "Automated billing creation",
+      "Optional fully-managed payroll services (with dedicated payroll head)",
     ],
-    unique: "Unlocks Premium Values and enterprise-grade support."
-  }
+    unique: "Complete package for enterprise-grade payroll operations.",
+  },
 ];
 
-// FAQ data
 const faqs = [
   {
     q: "Can I try Sparkle before committing?",
-    a: "Yes! Every plan comes with a 14-day free trial. No credit card required."
+    a: "Yes. Every plan comes with a 14-day free trial and no credit card required.",
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept all major credit cards and can invoice for annual contracts."
+    a: "We accept major credit cards and can invoice annual contracts.",
   },
   {
     q: "Can I change plans later?",
-    a: "Absolutely. Upgrade, downgrade, or cancel anytime from your dashboard."
+    a: "Yes. You can upgrade, downgrade, or cancel anytime from your dashboard.",
   },
   {
     q: "Is there a setup fee?",
-    a: "No setup fees. You only pay the monthly per-employee rate."
+    a: "No setup fees. You only pay the monthly per-employee rate.",
   },
   {
     q: "Is my data secure?",
-    a: "Yes. We use bank-level encryption and comply with industry standards."
-  }
+    a: "Yes. We use strong encryption and follow industry security standards.",
+  },
 ];
 
-
-// Comparison table features and availability matrix
 const tableFeatures = [
+  { label: "Digital clock-in / clock-out", keys: [true, true, true] },
+  { label: "Selfie with timestamp", keys: [true, true, true] },
+  { label: "GPS & geo-fencing", keys: [true, true, true] },
+  { label: "Attendance creation", keys: [true, true, true] },
+  { label: "Basic attendance & breaklist reports", keys: [true, true, true] },
+  { label: "CSV report extraction", keys: [true, true, true] },
+  { label: "Biometric-ready", keys: [true, true, true] },
+  { label: "Payroll computation", keys: [true, true, true] },
+  { label: "Payroll-ready DTR", keys: [true, true, true] },
+  { label: "Payslip generation", keys: [true, true, true] },
+  { label: "Technical support", keys: [true, true, true] },
+  { label: "Premium hours submissions (OT, NSD, RD)", keys: [true, true, true] },
   {
-    label: "My Schedule",
-    keys: [true, true, true]
+    label: "Automated premium pay and additional allowances computation",
+    keys: [true, true, true],
   },
+  { label: "Schedule confirmation & shift management", keys: [false, true, true] },
+  { label: "201 employee file management", keys: [false, true, true] },
   {
-    label: "My Documents",
-    keys: [true, true, true]
+    label: "Company tools (Profile, Code of Conduct, Company videos)",
+    keys: [false, false, true],
   },
-  {
-    label: "My Company",
-    keys: [true, true, true]
-  },
-  {
-    label: "My Request (Ticketing / Requests)",
-    keys: [true, true, true]
-  },
-  {
-    label: "Training & Development",
-    keys: [false, true, true]
-  },
-  {
-    label: "My Schedule Cost (Labor Cost Forecasting)",
-    keys: [false, true, true]
-  },
-  {
-    label: "Premium Values (OT, Rest Day, NSD input)",
-    keys: [false, false, true]
-  },
-  {
-    label: "Advanced Reports & Analytics",
-    keys: [false, true, true]
-  },
-  {
-    label: "Priority Support",
-    keys: [false, false, true]
-  }
+  { label: "Training videos & module management", keys: [false, false, true] },
+  { label: "Multi-process request management", keys: [false, false, true] },
+  { label: "Advanced & FGI report extraction", keys: [false, false, true] },
+  { label: "Automated billing creation", keys: [false, false, true] },
+  { label: "Optional fully-managed payroll services", keys: [false, false, true] },
 ];
 
 export default function Pricing() {
+  const [showMobileComparison, setShowMobileComparison] = useState(false);
+
   return (
     <div className="min-h-screen bg-muted/20 py-16">
-      {/* HERO SECTION */}
       <section className="max-w-4xl mx-auto px-6 text-center mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">Simple, Transparent Pricing</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+          PRICING PACKAGES
+        </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Choose the plan that fits your business. All plans include a 14-day free trial and unlimited support.
+          Choose the plan that fits your workforce and payroll operations.
         </p>
       </section>
 
-      {/* PRICING CARDS */}
       <section className="max-w-5xl mx-auto px-6 mb-16 grid md:grid-cols-3 gap-8">
         {plans.map((plan, i) => (
-          <div key={plan.name} className={`bg-white rounded-xl border border-border shadow p-8 flex flex-col items-center text-center gap-4 ${i === 1 ? 'ring-2 ring-primary' : ''}`}>
-            <span className="uppercase text-xs font-bold tracking-widest text-primary mb-2">{plan.name}</span>
-            <div className="text-4xl font-bold text-foreground">{plan.price} <span className="text-base font-normal text-muted-foreground">/{plan.period}</span></div>
+          <div
+            key={plan.name}
+            className={`bg-white rounded-xl border border-border shadow p-8 flex flex-col items-center text-center gap-4 ${
+              i === 1 ? "ring-2 ring-primary" : ""
+            }`}
+          >
+            <span className="uppercase text-xs font-bold tracking-widest text-primary mb-2">
+              {plan.name}
+            </span>
+            <div className="text-4xl font-bold text-foreground">
+              {plan.price}{" "}
+              <span className="text-base font-normal text-muted-foreground">
+                /{plan.period}
+              </span>
+            </div>
             <div className="text-sm text-muted-foreground mb-2">{plan.audience}</div>
-            <ul className="text-left text-sm mb-4 space-y-1">
-              {plan.features.map((f, idx) => (
-                <li key={idx} className="flex items-center gap-2"><span className="text-primary">•</span> {f}</li>
+            <ul className="text-left text-sm mb-4 space-y-2 w-full">
+              {plan.features.map((feature, idx) => (
+                <li
+                  key={feature}
+                  className={`items-start gap-2 ${
+                    idx < 7 ? "flex" : "hidden md:flex"
+                  }`}
+                >
+                  <Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <span>{feature}</span>
+                </li>
               ))}
             </ul>
+            {plan.features.length > 7 && (
+              <p className="text-xs text-muted-foreground md:hidden">
+                +{plan.features.length - 7} more features in this plan
+              </p>
+            )}
             <div className="text-xs text-muted-foreground mb-4">{plan.unique}</div>
             <Link to="/get-started">
-              <Button size="lg" variant={i === 1 ? "default" : "outline"}>{i === 2 ? "Contact Sales" : "Start Free Trial"}</Button>
+              <Button size="lg" variant={i === 1 ? "default" : "outline"}>
+                {i === 2 ? "Contact Sales" : "Start Free Trial"}
+              </Button>
             </Link>
           </div>
         ))}
       </section>
 
-      {/* COMPARISON TABLE */}
       <section className="max-w-6xl mx-auto px-6 mb-16">
-        <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Compare Plans</h2>
-        <div className="overflow-x-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
+          Compare Plans
+        </h2>
+        <div className="mb-4 md:hidden">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={() => setShowMobileComparison((prev) => !prev)}
+          >
+            {showMobileComparison ? "Hide full comparison" : "Compare all features"}
+          </Button>
+        </div>
+        <div className={`overflow-x-auto ${showMobileComparison ? "block" : "hidden md:block"}`}>
+          <p className="text-xs text-muted-foreground text-center mb-3 md:hidden">
+            Swipe left/right to view all plans.
+          </p>
           <table className="min-w-full border border-border rounded-xl bg-white">
             <thead>
               <tr>
-                <th className="p-3 text-left text-sm font-semibold text-foreground border-b border-border">Feature</th>
+                <th className="p-3 text-left text-sm font-semibold text-foreground border-b border-border">
+                  Feature
+                </th>
                 {plans.map((plan, idx) => (
                   <th
                     key={plan.name}
-                    className={`p-3 text-center text-sm font-semibold border-b border-border ${idx === 2 ? 'bg-primary/10 text-primary' : 'text-foreground'}`}
+                    className={`p-3 text-center text-sm font-semibold border-b border-border ${
+                      idx === 1 ? "bg-primary/10 text-primary" : "text-foreground"
+                    }`}
                   >
                     {plan.name}
                   </th>
@@ -174,18 +232,20 @@ export default function Pricing() {
               </tr>
             </thead>
             <tbody>
-              {tableFeatures.map((feature, i) => (
-                <tr key={i} className="border-b border-border">
+              {tableFeatures.map((feature) => (
+                <tr key={feature.label} className="border-b border-border">
                   <td className="p-3 text-sm text-foreground">{feature.label}</td>
                   {feature.keys.map((hasFeature, j) => (
                     <td
-                      key={j}
-                      className={`p-3 text-center align-middle ${j === 2 ? 'bg-primary/10' : ''}`}
+                      key={`${feature.label}-${j}`}
+                      className={`p-3 text-center align-middle ${
+                        j === 1 ? "bg-primary/10" : ""
+                      }`}
                     >
                       {hasFeature ? (
-                        <span className="text-primary font-bold text-lg" title="Included">✔</span>
+                        <Check className="h-5 w-5 text-primary mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground text-lg" title="Not included">—</span>
+                        <span className="text-muted-foreground text-lg">-</span>
                       )}
                     </td>
                   ))}
@@ -196,12 +256,13 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
       <section className="max-w-3xl mx-auto px-6 mb-16">
-        <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
+          Frequently Asked Questions
+        </h2>
         <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <div key={i} className="bg-white rounded-xl p-6 border border-border shadow">
+          {faqs.map((faq) => (
+            <div key={faq.q} className="bg-white rounded-xl p-6 border border-border shadow">
               <h3 className="font-semibold text-lg text-foreground mb-2">{faq.q}</h3>
               <p className="text-muted-foreground text-sm">{faq.a}</p>
             </div>
@@ -209,18 +270,20 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* CONTACT SALES CTA */}
       <section className="max-w-2xl mx-auto px-6 text-center mb-12">
-        <h2 className="text-2xl font-bold text-foreground mb-2">Need a custom solution?</h2>
-        <p className="text-muted-foreground mb-6">Contact our sales team for enterprise pricing, integrations, or tailored onboarding.</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">
+          Need a custom solution?
+        </h2>
+        <p className="text-muted-foreground mb-6">
+          Contact our sales team for enterprise pricing, integrations, or tailored onboarding.
+        </p>
         <Link to="/get-started">
           <Button size="lg">Contact Sales</Button>
         </Link>
       </section>
 
-      {/* FOOTER NOTE */}
       <footer className="text-center text-xs text-muted-foreground py-4">
-        Sparkle Timekeeping &copy; {new Date().getFullYear()} &mdash; All rights reserved.
+        Sparkle Timekeeping &copy; {new Date().getFullYear()} - All rights reserved.
       </footer>
     </div>
   );

@@ -2,7 +2,6 @@ import { type MouseEvent, useEffect, useRef, useState } from "react";
 import {
   CalendarClock,
   ChevronDown,
-  Clock,
   FileCheck2,
   FileText,
   Gauge,
@@ -97,6 +96,7 @@ const MOST_REQUESTED = [
   { label: "Shift Templates", path: "/features/my-schedule" },
   { label: "Manager Approvals", path: "/features/my-request" },
 ];
+const BRAND_LOGO_SRC = `${import.meta.env.BASE_URL}assets/sparkle-logo.png`;
 
 export function Navbar() {
   const location = useLocation();
@@ -117,7 +117,10 @@ export function Navbar() {
   useEffect(() => {
     const onPointerDown = (event: globalThis.MouseEvent) => {
       const target = event.target as Node;
-      if (featuresMenuRef.current && !featuresMenuRef.current.contains(target)) {
+      if (
+        featuresMenuRef.current &&
+        !featuresMenuRef.current.contains(target)
+      ) {
         setDesktopFeaturesOpen(false);
       }
     };
@@ -194,20 +197,19 @@ export function Navbar() {
   const isFeaturesActive = location.pathname.startsWith("/features");
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <nav className="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-3">
           <Link
             to="/"
-            className="flex items-center gap-2 min-w-0"
+            className="flex items-center min-w-0"
             onClick={(e) => handleNavClick(e, "/")}
           >
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-              <Clock className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-base sm:text-xl font-semibold text-foreground truncate">
-              Sparkle Timekeeping
-            </span>
+            <img
+              src={BRAND_LOGO_SRC}
+              alt="Sparkle Timekeeping"
+              className="h-auto w-[160px] sm:w-[215px] md:w-[205px] object-contain origin-left scale-x-[1.12]"
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
@@ -224,7 +226,10 @@ export function Navbar() {
                 aria-expanded={desktopFeaturesOpen}
                 onFocus={openFeaturesMenu}
                 onBlur={closeFeaturesMenuWithDelay}
-                onClick={() => setDesktopFeaturesOpen((prev) => !prev)}
+                onClick={() => {
+                  setDesktopFeaturesOpen(false);
+                  navigate("/features");
+                }}
               >
                 Features
                 <ChevronDown
@@ -256,14 +261,18 @@ export function Navbar() {
                                 <item.Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                                 <div>
                                   <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium text-foreground">{item.title}</span>
+                                    <span className="text-sm font-medium text-foreground">
+                                      {item.title}
+                                    </span>
                                     {item.badge && (
                                       <span className="rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase text-primary">
                                         {item.badge}
                                       </span>
                                     )}
                                   </div>
-                                  <p className="text-xs text-muted-foreground leading-snug">{item.desc}</p>
+                                  <p className="text-xs text-muted-foreground leading-snug">
+                                    {item.desc}
+                                  </p>
                                 </div>
                               </div>
                             </Link>
@@ -289,17 +298,27 @@ export function Navbar() {
                         ))}
                       </div>
                       <div className="mt-4 rounded-lg bg-white p-3 border border-border">
-                        <p className="text-sm font-semibold text-foreground">See Sparkle in action</p>
+                        <p className="text-sm font-semibold text-foreground">
+                          See Sparkle in action
+                        </p>
                         <p className="mt-1 text-xs text-muted-foreground">
                           Explore all capabilities and book a live walkthrough.
                         </p>
                         <div className="mt-3 flex gap-2">
                           <Link to="/features" className="flex-1">
-                            <Button size="sm" variant="secondary" className="w-full">
-                              See All
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              className="w-full"
+                            >
+                              See all features
                             </Button>
                           </Link>
-                          <a href="/#pricing" className="flex-1" onClick={handlePricingClick}>
+                          <a
+                            href="/#pricing"
+                            className="flex-1"
+                            onClick={handlePricingClick}
+                          >
                             <Button size="sm" className="w-full">
                               Book Demo
                             </Button>
@@ -373,7 +392,7 @@ export function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden mt-3 rounded-xl border border-border bg-white shadow-sm p-3">
+          <div className="md:hidden mt-3 rounded-xl border border-border bg-white shadow-sm p-3 max-h-[calc(100vh-5rem)] overflow-y-auto">
             <div className="flex flex-col gap-1">
               <button
                 type="button"
@@ -389,6 +408,13 @@ export function Navbar() {
 
               {mobileFeaturesOpen && (
                 <div className="ml-2 mt-1 mb-2 rounded-lg border border-border bg-muted/20 p-2">
+                  <Link
+                    to="/features"
+                    className="mb-2 block rounded-md px-2 py-1.5 text-sm font-medium text-primary hover:bg-white"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    See all features
+                  </Link>
                   {FEATURE_GROUPS.map((group) => (
                     <div key={group.label} className="mb-2 last:mb-0">
                       <p className="px-2 py-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-muted-foreground">

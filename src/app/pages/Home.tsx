@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
-  BarChart3,
-  Building2,
-  Calculator,
+  Camera,
   CheckCircle2,
+  Check,
   Clock3,
+  Crosshair,
   FileText,
+  Hourglass,
   ShieldCheck,
   Users,
+  Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HomeCarousel } from "../components/HomeCarousel";
@@ -17,29 +19,24 @@ import { Button } from "../components/ui/button";
 
 const BENEFITS = [
   {
-    title: "Live Scheduling and Time Capture",
-    desc: "See attendance in real time and adjust shifts without spreadsheet handoffs.",
-    Icon: Clock3,
+    title: "Payroll-Ready Accuracy",
+    desc: "Selfie-verified, timestamped, and location-validated entries eliminate time fraud, disputes, and encoding errors.",
+    Icon: Check,
   },
   {
-    title: "Accurate Premium and Overtime Rules",
-    desc: "Automate premium pay calculations and remove manual payroll corrections.",
-    Icon: Calculator,
+    title: "End-to-End Automation",
+    desc: "From attendance creation to OT, NSD, RD, allowances, and payroll computation, Sparkle automates what HR teams do manually.",
+    Icon: Zap,
   },
   {
-    title: "Employee Self-Service",
-    desc: "Staff can check schedules, submit requests, and stay aligned on one portal.",
+    title: "Real-Time Workforce Visibility",
+    desc: "Instant insights into attendance, absences, hours worked, and productivity - enabling faster, smarter decisions.",
+    Icon: Hourglass,
+  },
+  {
+    title: "Scalable for Any Organization",
+    desc: "Whether managing 20 or 2,000+ employees, Sparkle grows with your workforce and operational needs.",
     Icon: Users,
-  },
-  {
-    title: "Compliance-Ready Controls",
-    desc: "Centralized approvals and audit trails keep HR and operations protected.",
-    Icon: ShieldCheck,
-  },
-  {
-    title: "Labor Cost Forecasting",
-    desc: "Model workforce cost before schedules are published to prevent overruns.",
-    Icon: BarChart3,
   },
 ];
 
@@ -127,20 +124,44 @@ const STEPS = [
   },
 ];
 
-const TESTIMONIALS = [
+const FEATURED_SERVICES = [
   {
-    quote:
-      "We cut payroll prep from 6 hours to under 3 and eliminated recurring overtime disputes.",
-    name: "Alyssa Ramos",
-    role: "HR Director, Northpoint Retail",
-    result: "40% faster payroll preparation",
+    title: "Selfie, GPS & PST Time Capture",
+    desc: "Verified and timestamped clock-ins.",
+    Icon: Camera,
   },
   {
-    quote:
-      "Scheduling across four branches used to be chaos. Sparkle gave managers visibility in one day.",
-    name: "Daniel Cruz",
-    role: "Operations Manager, Harborline Hotels",
-    result: "2x faster shift publishing",
+    title: "Instant DTR Generation",
+    desc: "Real-time view of attendance records.",
+    Icon: Crosshair,
+  },
+  {
+    title: "Payslip Viewing",
+    desc: "Secure online payslip access.",
+    Icon: ShieldCheck,
+  },
+];
+
+const PARTNERS = [
+  {
+    name: "Jollibee Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/jollibee.png`,
+  },
+  {
+    name: "Pepper Lunch Franchise Store",
+    src: `${import.meta.env.BASE_URL}assets/pepper-lunch.png`,
+  },
+  {
+    name: "EBC",
+    src: `${import.meta.env.BASE_URL}assets/ebc.png`,
+  },
+  {
+    name: "K-HIANG",
+    src: `${import.meta.env.BASE_URL}assets/khiang.png`,
+  },
+  {
+    name: "7-STAR",
+    src: `${import.meta.env.BASE_URL}assets/7star.png`,
   },
 ];
 
@@ -157,9 +178,24 @@ export default function Home() {
   const [activeFeature, setActiveFeature] = useState(FEATURE_TABS[0].id);
   const [showStickyCta, setShowStickyCta] = useState(false);
   const heroImageSrc = DEPLOYED_DASHBOARD_IMAGE;
+  const handlePricingScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById("pricing");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   useEffect(() => {
-    const onScroll = () => setShowStickyCta(window.scrollY > 420);
+    const SHOW_AT = 520;
+    const HIDE_AT = 420;
+    const onScroll = () => {
+      setShowStickyCta((prev) => {
+        if (!prev && window.scrollY > SHOW_AT) return true;
+        if (prev && window.scrollY < HIDE_AT) return false;
+        return prev;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -200,11 +236,13 @@ export default function Home() {
               Setup in under 15 minutes
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              Cut payroll prep time by up to 40 percent
+              Turn Time Into
+              Payroll-Ready Intelligence
             </h1>
             <p className="text-lg text-muted-foreground">
-              Sparkle Timekeeping helps growing teams schedule smarter, control
-              overtime, and stay compliant.
+              All-in-one time, attendance, and 
+              payroll-support platform
+              Accurate. Automated. Compliant.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link to="/get-started">
@@ -212,7 +250,7 @@ export default function Home() {
                   Start Free Trial
                 </Button>
               </Link>
-              <a href="#pricing">
+              <a href="#pricing" onClick={handlePricingScroll}>
                 <Button
                   size="lg"
                   variant="outline"
@@ -269,10 +307,13 @@ export default function Home() {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-foreground mb-10 text-center">
-            Why teams switch to Sparkle
-          </h2>
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <p className="text-lg text-foreground mb-8 text-center">
+            <span className="font-bold">Sparkle Time Keeping</span> eliminates
+            manual errors, reduces labor costs, and ensures compliance by
+            transforming attendance data into payroll-ready intelligence - from
+            clock-in to payslip.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {BENEFITS.map((benefit, index) => (
               <article
                 key={benefit.title}
@@ -286,6 +327,33 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm mt-2">
                   {benefit.desc}
                 </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      <section className="py-12 bg-muted/25">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-foreground mb-8 text-center sm:text-left">
+            FEATURED SERVICES
+          </h2>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {FEATURED_SERVICES.map((service, index) => (
+              <article
+                key={service.title}
+                className="reveal-up rounded-xl border border-border bg-white p-6 shadow-sm"
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                  <service.Icon className="h-7 w-7" />
+                </div>
+                <h3 className="text-3xl font-semibold text-foreground leading-tight">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-muted-foreground">{service.desc}</p>
               </article>
             ))}
           </div>
@@ -423,33 +491,26 @@ export default function Home() {
       <section className="py-16 bg-muted/25">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-foreground mb-3 text-center">
-            What customers are seeing
+            OUR CLIENT PARTNERS
           </h2>
-          <p className="text-center text-muted-foreground mb-8">
-            Real outcomes from teams using Sparkle daily.
+          <p className="text-center text-muted-foreground mb-10">
+            Trusted organizations growing with Sparkle Timekeeping
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            {TESTIMONIALS.map((item, index) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+            {PARTNERS.map((partner, index) => (
               <article
-                key={item.name}
-                className="reveal-up rounded-xl border border-border bg-white p-7 shadow-sm"
-                style={{ animationDelay: `${index * 100}ms` }}
+                key={partner.name}
+                className="group reveal-up rounded-2xl border border-border/80 bg-white/90 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/40 text-center flex flex-col items-center justify-center min-h-[160px] sm:min-h-[180px]"
+                style={{ animationDelay: `${index * 70}ms` }}
               >
-                <div className="mb-4 flex items-center gap-1 text-primary">
-                  {Array.from({ length: 5 }).map((_, star) => (
-                    <Building2 key={star} className="h-4 w-4" />
-                  ))}
-                </div>
-                <blockquote className="text-foreground leading-relaxed">
-                  "{item.quote}"
-                </blockquote>
-                <p className="mt-4 text-sm font-semibold text-primary">
-                  {item.result}
+                <ImageWithFallback
+                  src={partner.src}
+                  alt={partner.name}
+                  className="h-16 sm:h-20 w-full object-contain grayscale-0 opacity-100 sm:grayscale sm:opacity-75 transition-all duration-300 ease-in-out sm:group-hover:grayscale-0 sm:group-hover:opacity-100"
+                />
+                <p className="mt-3 sm:mt-4 text-sm sm:text-base font-medium text-foreground sm:text-foreground/80 transition-colors duration-300 sm:group-hover:text-foreground">
+                  {partner.name}
                 </p>
-                <p className="mt-3 font-semibold text-foreground">
-                  {item.name}
-                </p>
-                <p className="text-sm text-muted-foreground">{item.role}</p>
               </article>
             ))}
           </div>
@@ -472,7 +533,7 @@ export default function Home() {
                 Start Free Trial
               </Button>
             </Link>
-            <a href="#pricing">
+            <a href="#pricing" onClick={handlePricingScroll}>
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Book a Demo
               </Button>
@@ -482,7 +543,7 @@ export default function Home() {
       </section>
 
       <div
-        className={`fixed inset-x-4 bottom-4 z-50 transition-all duration-300 sm:left-auto sm:right-6 sm:w-[360px] ${
+        className={`fixed inset-x-4 bottom-4 z-50 transition-[transform,opacity] duration-300 ease-out will-change-transform sm:left-auto sm:right-6 sm:w-[360px] ${
           showStickyCta
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-6 opacity-0"
@@ -501,7 +562,7 @@ export default function Home() {
                 Start Trial
               </Button>
             </Link>
-            <a href="#pricing" className="flex-1">
+            <a href="#pricing" className="flex-1" onClick={handlePricingScroll}>
               <Button size="sm" variant="outline" className="w-full">
                 View Pricing
               </Button>

@@ -61,7 +61,7 @@ export function Hero() {
                 className="w-full rounded-lg"
               />
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl" />
             </div>
           </div>
         </div>
