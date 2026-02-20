@@ -106,9 +106,9 @@ const PAGE_MANUAL: ManualPage[] = [
     purpose: "Trust and credibility page for brand positioning",
     file: "src/app/pages/About.tsx",
     editable: [
-      "Hero message and value proposition",
-      "Outcome cards, trust pillars, and milestone copy",
-      "Team credibility cards and final CTA section",
+      "Hero message and quote banner",
+      "Inspiration, Innovations, Vision, Mission, Core Values, and Philosophy strip",
+      "Innovation card images and final CTA section",
     ],
   },
   {
@@ -141,26 +141,26 @@ const HOME_PANELS: InteractivePanel[] = [
   {
     id: "hero",
     label: "Hero",
-    title: "First impression section",
+    title: "Hero and phone preview",
     description:
-      "Edit your main value proposition, badges, and hero dashboard image to match your latest campaign.",
+      "Edit headline, subtext, hero badges, and the mobile-style dashboard preview with privacy blur.",
     image: "/assets/HERO-DASHBOARD.png",
   },
   {
     id: "tabs",
     label: "Feature Tabs",
-    title: "Interactive feature storytelling",
+    title: "Product walk-through tabs",
     description:
-      "Switch feature tab labels, benefits, and screenshots to highlight your strongest product modules.",
-    image: "/assets/PLACEHOLDER-FLOATING-2.png",
+      "Update Scheduling/Overtime/Documents/Requests tab labels, bullets, and walkthrough screenshots.",
+    image: "/assets/walkthrough/walkthrough-01-scheduling.png",
   },
   {
-    id: "cta",
-    label: "CTA",
-    title: "Final conversion section",
+    id: "partners",
+    label: "Partners",
+    title: "Client partner showcase",
     description:
-      "Tune CTA wording, proof points, and button labels to increase trial signups and demo requests.",
-    image: "/assets/PLACEHOLDER-FLOATING-3.png",
+      "Manage partner logos, names, and hover behavior for the OUR CLIENT PARTNERS section.",
+    image: "/assets/jollibee.png",
   },
 ];
 
@@ -195,26 +195,156 @@ const ABOUT_PANELS: InteractivePanel[] = [
   {
     id: "story",
     label: "Story",
-    title: "Brand promise and positioning",
+    title: "Inspiration and story",
     description:
-      "Edit the high-level message, mission, and vision to align with your ideal customer and industry tone.",
+      "Edit About hero quote and the Our Inspiration narrative content block.",
     image: ABOUT_PREVIEW_IMAGES.story,
   },
   {
-    id: "trust",
-    label: "Trust",
-    title: "Proof, security, and credibility",
+    id: "innovations",
+    label: "Innovations",
+    title: "Innovation product cards",
     description:
-      "Update trust pillars, outcome metrics, and customer confidence messaging.",
-    image: ABOUT_PREVIEW_IMAGES.trust,
+      "Update the four innovation cards and replace logos from assets/innovations.",
+    image: "/assets/innovations/innovation-01-stk.png",
   },
   {
-    id: "team",
-    label: "Team",
-    title: "People and momentum",
+    id: "vision-mission",
+    label: "Vision/Mission",
+    title: "Vision, mission, values, and philosophy",
     description:
-      "Refine team cards and milestone timeline to show progress and reliability.",
+      "Adjust mission bullets, core values copy, and philosophy strip presentation.",
     image: ABOUT_PREVIEW_IMAGES.team,
+  },
+];
+
+const PRICING_PANELS: InteractivePanel[] = [
+  {
+    id: "plans",
+    label: "Plans",
+    title: "Plan cards and pricing tiers",
+    description:
+      "Edit plan names, prices, and included feature lists in both pricing files.",
+    image: "/assets/walkthrough/walkthrough-02-overtime.png",
+  },
+  {
+    id: "comparison",
+    label: "Comparison",
+    title: "Feature comparison table",
+    description:
+      "Control checkmark availability and row order for Starter, Growth, and Enterprise.",
+    image: "/assets/walkthrough/walkthrough-03-documents.png",
+  },
+  {
+    id: "mobile",
+    label: "Mobile UX",
+    title: "Mobile pricing interaction",
+    description:
+      "Configure the Compare all features toggle and the short-list card behavior on small screens.",
+    image: "/assets/walkthrough/walkthrough-04-requests.png",
+  },
+];
+
+const NAVBAR_PANELS: InteractivePanel[] = [
+  {
+    id: "links",
+    label: "Links",
+    title: "Header links and destinations",
+    description:
+      "Edit top navigation links, active states, and smooth scroll behavior for pricing anchors.",
+    image: "/assets/sparkle-logo.png",
+  },
+  {
+    id: "features-menu",
+    label: "Features Menu",
+    title: "Desktop dropdown and mobile submenu",
+    description:
+      "Manage FEATURE_GROUPS, badges, Most Requested links, and See all features behavior.",
+    image: "/assets/walkthrough/walkthrough-01-scheduling.png",
+  },
+  {
+    id: "actions",
+    label: "Actions",
+    title: "Manual / Sign In / Get Started actions",
+    description:
+      "Configure CTA button labels, routes, and compact mobile action layout.",
+    image: "/assets/walkthrough/walkthrough-02-overtime.png",
+  },
+];
+
+const DEV_INSTRUCTIONS = [
+  {
+    title: "Routes and Pages",
+    points: [
+      "/ -> Home.tsx",
+      "/features + /features/:featureKey -> Features.tsx + FeatureDetail.tsx",
+      "/how-it-works, /pricing, /about, /get-started, /sign-in and support pages are mapped in App.tsx",
+      "Add new route in src/app/App.tsx, then add its page file under src/app/pages/",
+    ],
+  },
+  {
+    title: "Navbar and Footer",
+    points: [
+      "Navbar is in src/app/components/Navbar.tsx",
+      "Feature dropdown groups are controlled by FEATURE_GROUPS and MOST_REQUESTED",
+      "Footer is in src/app/components/Footer.tsx",
+      "Pricing links use smooth scroll to #pricing on Home",
+    ],
+  },
+  {
+    title: "Home Content Controls",
+    points: [
+      "Main editable blocks: BENEFITS, FEATURED_SERVICES, FEATURE_TABS, STEPS, PARTNERS",
+      "Product walk-through tabs use FEATURE_TABS images",
+      "Hero phone preview uses assets/HERO-DASHBOARD.png with privacy blur overlay",
+      "Sticky CTA appears after scroll threshold and links to /get-started and #pricing",
+    ],
+  },
+  {
+    title: "Pricing Controls",
+    points: [
+      "Home pricing component: src/app/components/Pricing.tsx",
+      "Full pricing page: src/app/pages/Pricing.tsx",
+      "Keep both plan arrays and comparison rows aligned",
+      "Mobile UX: show top features first, then expand comparison table",
+    ],
+  },
+  {
+    title: "About Page Controls",
+    points: [
+      "About content is in src/app/pages/About.tsx",
+      "Sections: Inspiration, Innovations, Vision, Mission, Core Values, Philosophy, CTA",
+      "Innovation cards are controlled by INNOVATIONS array",
+      "Mission bullets are controlled by MISSION_POINTS array",
+    ],
+  },
+  {
+    title: "Assets and Naming",
+    points: [
+      "Brand logo: public/assets/sparkle-logo.png",
+      "Favicon: public/assets/stk-favicon.png (set in index.html)",
+      "Carousel images: public/assets/carousel/carousel-01..06-*.png",
+      "Walk-through images: public/assets/walkthrough/walkthrough-01..04-*.png",
+      "Innovation images: public/assets/innovations/innovation-01..04-*.png",
+    ],
+  },
+  {
+    title: "Theme and Branding",
+    points: [
+      "Primary accent and color tokens are in src/styles/theme.css",
+      "Navbar hover underline style is in src/styles/navbar.css",
+      "Global reveal/hover animation helpers are in src/styles/index.css",
+      "Use import.meta.env.BASE_URL for deploy-safe asset paths",
+    ],
+  },
+  {
+    title: "Deployment Notes",
+    points: [
+      "GitHub Pages workflow: .github/workflows/deploy-pages.yml",
+      "Vite base path is configured in vite.config.ts",
+      "For repo deploy, production base must match /commercial-stk/",
+      "If page is blank after deploy, re-check base path and asset URLs first",
+    ],
   },
 ];
 
@@ -223,6 +353,8 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
   const [homePanel, setHomePanel] = useState(HOME_PANELS[0].id);
   const [howItWorksPanel, setHowItWorksPanel] = useState(HOW_IT_WORKS_PANELS[0].id);
   const [aboutPanel, setAboutPanel] = useState(ABOUT_PANELS[0].id);
+  const [pricingPanel, setPricingPanel] = useState(PRICING_PANELS[0].id);
+  const [navbarPanel, setNavbarPanel] = useState(NAVBAR_PANELS[0].id);
 
   const activePage =
     PAGE_MANUAL.find((page) => page.id === selectedPage) ?? PAGE_MANUAL[0];
@@ -234,12 +366,27 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
     HOW_IT_WORKS_PANELS[0];
   const activeAboutPanel =
     ABOUT_PANELS.find((panel) => panel.id === aboutPanel) ?? ABOUT_PANELS[0];
+  const activePricingPanel =
+    PRICING_PANELS.find((panel) => panel.id === pricingPanel) ??
+    PRICING_PANELS[0];
+  const activeNavbarPanel =
+    NAVBAR_PANELS.find((panel) => panel.id === navbarPanel) ??
+    NAVBAR_PANELS[0];
 
   const activePanel = useMemo(() => {
     if (selectedPage === "how-it-works") return activeHowPanel;
     if (selectedPage === "about") return activeAboutPanel;
+    if (selectedPage === "pricing") return activePricingPanel;
+    if (selectedPage === "navbar") return activeNavbarPanel;
     return activeHomePanel;
-  }, [activeAboutPanel, activeHomePanel, activeHowPanel, selectedPage]);
+  }, [
+    activeAboutPanel,
+    activeHomePanel,
+    activeHowPanel,
+    activeNavbarPanel,
+    activePricingPanel,
+    selectedPage,
+  ]);
 
   return (
     <Dialog>
@@ -317,7 +464,13 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
             </ul>
           </div>
 
-          {(selectedPage === "home" || selectedPage === "how-it-works" || selectedPage === "about") && (
+          {(
+            selectedPage === "home" ||
+            selectedPage === "how-it-works" ||
+            selectedPage === "about" ||
+            selectedPage === "pricing" ||
+            selectedPage === "navbar"
+          ) && (
             <div className="mt-4 grid lg:grid-cols-[1fr_0.9fr] gap-4">
               <div className="rounded-md border border-border bg-white p-4">
                 <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground mb-2">
@@ -328,7 +481,11 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
                     ? HOW_IT_WORKS_PANELS
                     : selectedPage === "about"
                       ? ABOUT_PANELS
-                      : HOME_PANELS).map(
+                      : selectedPage === "pricing"
+                        ? PRICING_PANELS
+                        : selectedPage === "navbar"
+                          ? NAVBAR_PANELS
+                          : HOME_PANELS).map(
                     (panel) => (
                       <button
                         key={panel.id}
@@ -338,6 +495,10 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
                             ? setHowItWorksPanel(panel.id)
                             : selectedPage === "about"
                               ? setAboutPanel(panel.id)
+                              : selectedPage === "pricing"
+                                ? setPricingPanel(panel.id)
+                                : selectedPage === "navbar"
+                                  ? setNavbarPanel(panel.id)
                             : setHomePanel(panel.id)
                         }
                         className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
@@ -377,6 +538,25 @@ export function ManualModal({ triggerClassName, compact }: ManualModalProps) {
                 <p className="text-xs text-muted-foreground">{feature.tagline}</p>
                 <p className="text-xs text-primary mt-1">/features/{feature.key}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-lg border border-border bg-muted/20 p-4">
+          <h3 className="font-semibold text-foreground mb-2">Developer Instruction Manual</h3>
+          <p className="text-xs text-muted-foreground mb-4">
+            Quick reference for tabs, buttons, functions, editable blocks, links, assets, and deployment behavior.
+          </p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {DEV_INSTRUCTIONS.map((group) => (
+              <article key={group.title} className="rounded-md border border-border bg-white p-3">
+                <p className="text-sm font-semibold text-foreground">{group.title}</p>
+                <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+                  {group.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
         </section>

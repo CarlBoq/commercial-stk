@@ -41,6 +41,7 @@ const BENEFITS = [
 ];
 
 const DEPLOYED_DASHBOARD_IMAGE = `${import.meta.env.BASE_URL}assets/HERO-DASHBOARD.png`;
+const WALKTHROUGH_BASE_PATH = `${import.meta.env.BASE_URL}assets/walkthrough`;
 
 const FEATURE_TABS = [
   {
@@ -54,7 +55,7 @@ const FEATURE_TABS = [
       "Conflict detection before publish",
       "One-click notifications to employees",
     ],
-    image: DEPLOYED_DASHBOARD_IMAGE,
+    image: `${WALKTHROUGH_BASE_PATH}/walkthrough-01-scheduling.png`,
   },
   {
     id: "overtime",
@@ -67,7 +68,7 @@ const FEATURE_TABS = [
       "Rest-day and night differential support",
       "Payroll-ready exports with fewer edits",
     ],
-    image: DEPLOYED_DASHBOARD_IMAGE,
+    image: `${WALKTHROUGH_BASE_PATH}/walkthrough-02-overtime.png`,
   },
   {
     id: "documents",
@@ -80,7 +81,7 @@ const FEATURE_TABS = [
       "Fast retrieval for audits and onboarding",
       "Role-based visibility by team",
     ],
-    image: DEPLOYED_DASHBOARD_IMAGE,
+    image: `${WALKTHROUGH_BASE_PATH}/walkthrough-03-documents.png`,
   },
   {
     id: "requests",
@@ -93,7 +94,7 @@ const FEATURE_TABS = [
       "Manager review queue and status tracking",
       "Clear employee status updates",
     ],
-    image: DEPLOYED_DASHBOARD_IMAGE,
+    image: `${WALKTHROUGH_BASE_PATH}/walkthrough-04-requests.png`,
   },
 ];
 
@@ -275,18 +276,23 @@ export default function Home() {
             className="relative flex justify-center items-center reveal-up"
             style={{ animationDelay: "120ms" }}
           >
-            <span className="absolute -top-3 left-2 rounded-full border border-primary/20 bg-white px-3 py-1 text-xs font-medium text-primary shadow-sm">
-              Live Attendance
-            </span>
-            <span className="absolute -bottom-4 right-4 rounded-full border border-primary/20 bg-white px-3 py-1 text-xs font-medium text-primary shadow-sm">
-              Auto Overtime Rules
-            </span>
-            <div className="w-full max-w-md aspect-[16/10] rounded-2xl shadow-2xl border border-border overflow-hidden bg-muted/40">
-              <ImageWithFallback
-                src={heroImageSrc}
-                alt="Sparkle Timekeeping dashboard preview"
-                className="h-full w-full object-fill"
-              />
+            <div className="relative inline-flex items-center justify-center">
+              <span className="absolute z-20 top-3 -left-8 sm:-left-10 rounded-full border border-primary/20 bg-white px-3 py-1 text-[11px] sm:text-xs font-medium text-primary shadow-sm whitespace-nowrap">
+                Live Attendance
+              </span>
+              <span className="absolute z-20 bottom-3 -right-10 sm:-right-12 rounded-full border border-primary/20 bg-white px-3 py-1 text-[11px] sm:text-xs font-medium text-primary shadow-sm whitespace-nowrap">
+                Auto Overtime Rules
+              </span>
+              <div className="relative z-10 w-[165px] sm:w-[185px] md:w-[205px] aspect-[9/19] rounded-[2rem] shadow-xl border border-slate-300 overflow-hidden bg-slate-950 p-1.5">
+                <div className="absolute top-2.5 left-1/2 z-10 h-1 w-12 -translate-x-1/2 rounded-full bg-white/40" />
+                <ImageWithFallback
+                  src={heroImageSrc}
+                  alt="Sparkle Timekeeping dashboard preview"
+                  className="h-full w-full rounded-[1.5rem] bg-white object-contain"
+                />
+                <div className="pointer-events-none absolute left-3 right-3 top-[23%] h-[12%] rounded-lg bg-white/30 backdrop-blur-sm" />
+                <div className="pointer-events-none absolute bottom-2.5 left-1/2 z-10 h-1 w-14 -translate-x-1/2 rounded-full bg-white/45" />
+              </div>
             </div>
           </div>
         </div>
