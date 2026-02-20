@@ -43,6 +43,8 @@ const BENEFITS = [
   },
 ];
 
+const DEPLOYED_DASHBOARD_IMAGE = `${import.meta.env.BASE_URL}assets/HERO-DASHBOARD.png`;
+
 const FEATURE_TABS = [
   {
     id: "scheduling",
@@ -106,8 +108,6 @@ const LOGOS = [
   "Summit Logistics",
   "Clearview Services",
 ];
-
-const DEPLOYED_DASHBOARD_IMAGE = `${import.meta.env.BASE_URL}assets/HERO-DASHBOARD.png`;
 
 const STEPS = [
   {
