@@ -1,81 +1,40 @@
 import React, { useEffect } from "react";
-import {
-  CheckCircle2,
-  Clock3,
-  Lock,
-  ShieldCheck,
-  Sparkles,
-  Users,
-} from "lucide-react";
+import { Gem, Lightbulb, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Button } from "../components/ui/button";
 
-const METRICS = [
-  { label: "Teams supported", value: "2,000+" },
-  { label: "Payroll prep reduction", value: "Up to 40%" },
-  { label: "Average onboarding", value: "Under 1 day" },
+const MISSION_POINTS = [
+  "Create technological breakthroughs that are built low-cost and have high impact in the economy and the society.",
+  "Establish software services that are tailored-fit to solve current and future problems of the company and their target consumers.",
+  "Enable projects that will fuel new growth, new solutions and new ecosystems for the future.",
 ];
 
-const OUTCOMES = [
+const INNOVATIONS = [
   {
-    title: "Less payroll rework",
-    desc: "Teams reduce manual payroll cleanup with clearer overtime and request workflows.",
-    result: "Up to 32% fewer payroll disputes",
+    name: "Sparkle Time Keeping System",
+    description:
+      "A reliable and secure solution for accurate employee time tracking, attendance management, and seamless payroll processing.",
+    src: `${import.meta.env.BASE_URL}assets/innovations/innovation-01-stk.png`,
   },
   {
-    title: "Faster schedule publishing",
-    desc: "Managers publish shifts faster using centralized planning and confirmation tools.",
-    result: "2x faster shift planning cycles",
+    name: "Starjobs: Talents and Skills Services App",
+    description:
+      "An online platform that connects clients and principals to JOBSTERS - independent contractors, freelancers, and relievers - enabling short-term and temporary engagement opportunities.",
+    src: `${import.meta.env.BASE_URL}assets/innovations/innovation-02-starjobs.png`,
   },
   {
-    title: "Higher team visibility",
-    desc: "HR and operations can act earlier with real-time attendance and request visibility.",
-    result: "30% faster decision turnaround",
-  },
-];
-
-const TRUST_PILLARS = [
-  {
-    title: "Security by default",
-    desc: "Role-based access, protected records, and secure data handling for workforce operations.",
-    Icon: Lock,
+    name: "Sparkle POS",
+    description:
+      "A modern, efficient point-of-sale system that streamlines sales, inventory, and business operations.",
+    src: `${import.meta.env.BASE_URL}assets/innovations/innovation-03-pos.png`,
   },
   {
-    title: "Compliance-ready workflows",
-    desc: "Structured policies and approvals that reduce risk and improve reporting confidence.",
-    Icon: ShieldCheck,
+    name: "Sparkle Form",
+    description:
+      "A versatile digital form solution for effortless data collection, management, and insightful analysis.",
+    src: `${import.meta.env.BASE_URL}assets/innovations/innovation-04-form.png`,
   },
-  {
-    title: "Practical support",
-    desc: "A product and support team focused on helping your team launch quickly and stay efficient.",
-    Icon: Users,
-  },
-];
-
-const TEAM = [
-  {
-    name: "Alyssa Ramos",
-    role: "Product Lead",
-    focus: "Turns field feedback into practical workflow improvements.",
-  },
-  {
-    name: "Daniel Cruz",
-    role: "Customer Success Lead",
-    focus: "Helps teams onboard fast and optimize their daily operations.",
-  },
-  {
-    name: "Mia Santos",
-    role: "Compliance Specialist",
-    focus: "Ensures policy and reporting workflows stay audit-friendly.",
-  },
-];
-
-const MILESTONES = [
-  { year: "2022", title: "Sparkle launched", desc: "Started with scheduling and attendance core features." },
-  { year: "2023", title: "Payroll workflows expanded", desc: "Added premium value handling and request approvals." },
-  { year: "2024", title: "Feature modules scaled", desc: "Introduced documents, company, and training modules." },
-  { year: "2025", title: "Multi-team adoption growth", desc: "Expanded across more industries and multi-branch teams." },
 ];
 
 export default function About() {
@@ -103,154 +62,134 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-muted/20">
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/15 via-primary/5 to-white py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(14,165,233,0.2),transparent_44%)]" />
-        <div className="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
-          <div className="reveal-up">
-            <p className="inline-flex items-center rounded-full border border-primary/30 bg-white/80 px-4 py-1 text-xs font-semibold tracking-[0.14em] uppercase text-primary">
-              About Sparkle Timekeeping
-            </p>
-            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
-              Built to simplify workforce operations for growing organizations
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-              Sparkle helps HR and operations teams manage scheduling, attendance, and payroll workflows with speed, accuracy, and confidence.
-            </p>
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link to="/get-started">
-                <Button size="lg" className="w-full sm:w-auto">Start Free Trial</Button>
-              </Link>
-              <Link to="/contact">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">Schedule Demo</Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="reveal-up rounded-2xl border border-border bg-white p-4 shadow-xl" style={{ animationDelay: "90ms" }}>
-            <div className="aspect-[16/10] rounded-xl overflow-hidden bg-muted/30">
-              <ImageWithFallback
-                src="/assets/PLACEHOLDER-TEAM-PHOTO.png"
-                alt="Sparkle team collaboration"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
+      <section className="relative overflow-hidden bg-[linear-gradient(130deg,#0c5dbd_0%,#1577dd_45%,#2fb9e8_100%)] py-16 sm:py-20">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.35),transparent_40%),radial-gradient(circle_at_80%_90%,rgba(255,255,255,0.2),transparent_42%)]" />
+        <div className="pointer-events-none absolute -bottom-16 left-0 h-48 w-[130%] -translate-x-[8%] rounded-[100%] bg-white/85" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <p className="inline-flex items-center rounded-full border border-white/40 bg-white/15 px-4 py-1 text-xs font-semibold tracking-[0.14em] uppercase text-white">
+            About Sparkle
+          </p>
+          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-[0.03em] text-white reveal-up">
+            Be The Future... Today!!!
+          </h1>
+          <p className="mt-6 inline-block max-w-2xl rounded-xl bg-black/30 px-4 py-3 text-white text-lg italic leading-relaxed shadow-sm backdrop-blur-[1px] reveal-up">
+            "Sparkle recognizes every business as vital in refueling our economy amid pandemic crisis"
+          </p>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-8">
-        <div className="grid sm:grid-cols-3 gap-3 reveal-up">
-          {METRICS.map((metric) => (
-            <div key={metric.label} className="rounded-xl border border-border bg-white p-4 text-center shadow-sm">
-              <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">{metric.label}</p>
-              <p className="mt-1 text-lg font-semibold text-foreground">{metric.value}</p>
-            </div>
-          ))}
-        </div>
+      <section className="max-w-6xl mx-auto px-6 py-14">
+        <article className="reveal-up rounded-2xl border border-border bg-white p-6 sm:p-8 shadow-sm">
+          <h2 className="text-3xl font-bold text-primary">OUR INSPIRATION</h2>
+          <p className="mt-5 text-base leading-relaxed text-foreground">
+            Launched December 2020, what started out as a desire to help during
+            the pandemic has now grown into a recognized software company in the
+            Philippines. Bringing technology and innovations in various
+            industries, SparkleStar aims to influence the future to bring
+            solutions, sustainability and growth for each Filipino.
+          </p>
+        </article>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 reveal-up">
-          Customer outcomes we optimize for
+      <section className="max-w-7xl mx-auto px-6 pb-14">
+        <h2 className="text-4xl sm:text-5xl font-bold text-primary text-center mb-8 reveal-up">
+          OUR INNOVATIONS
         </h2>
-        <div className="grid md:grid-cols-3 gap-5">
-          {OUTCOMES.map((outcome, index) => (
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {INNOVATIONS.map((item, index) => (
             <article
-              key={outcome.title}
-              className="reveal-up hover-lift rounded-xl border border-border bg-white p-5 shadow-sm"
-              style={{ animationDelay: `${index * 80}ms` }}
-            >
-              <h3 className="text-lg font-semibold text-foreground">{outcome.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{outcome.desc}</p>
-              <p className="mt-4 text-sm font-semibold text-primary">{outcome.result}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-6 py-10">
-        <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-          <article className="reveal-up rounded-xl border border-border bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-foreground mb-3">Our mission</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              To provide businesses with a reliable, people-first workforce platform that makes scheduling, attendance, and payroll preparation easier to operate and easier to trust.
-            </p>
-            <h2 className="text-2xl font-bold text-foreground mb-3 mt-8">Our vision</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              To become the practical operating layer for workforce management where HR, operations, and employees stay aligned in real time.
-            </p>
-          </article>
-
-          <article className="reveal-up rounded-xl border border-border bg-white p-6 shadow-sm" style={{ animationDelay: "90ms" }}>
-            <h2 className="text-2xl font-bold text-foreground mb-3">Why teams trust Sparkle</h2>
-            <div className="space-y-4">
-              {TRUST_PILLARS.map((pillar) => (
-                <div key={pillar.title} className="rounded-lg border border-border bg-muted/20 p-3">
-                  <div className="flex items-start gap-3">
-                    <pillar.Icon className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{pillar.title}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{pillar.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-6 py-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 reveal-up">
-          Team credibility
-        </h2>
-        <div className="grid md:grid-cols-3 gap-5">
-          {TEAM.map((member, index) => (
-            <article
-              key={member.name}
-              className="reveal-up hover-lift rounded-xl border border-border bg-white p-5 shadow-sm"
+              key={item.name}
+              className="reveal-up rounded-3xl border border-border bg-white/95 p-6 text-center shadow-sm hover-lift"
               style={{ animationDelay: `${index * 70}ms` }}
             >
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <Users className="h-5 w-5" />
+              <div className="mx-auto mb-5 flex h-24 items-center justify-center">
+                <ImageWithFallback
+                  src={item.src}
+                  alt={item.name}
+                  className="max-h-24 w-auto max-w-full object-contain"
+                />
               </div>
-              <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
-              <p className="text-sm text-primary">{member.role}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{member.focus}</p>
+              <h3 className="text-[2rem] leading-tight font-bold text-primary">
+                {item.name}
+              </h3>
+              <p className="mt-4 text-foreground leading-relaxed">
+                {item.description}
+              </p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 reveal-up">
-          Growth milestones
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {MILESTONES.map((milestone, index) => (
-            <article
-              key={milestone.year}
-              className="reveal-up rounded-xl border border-border bg-white p-5 shadow-sm"
-              style={{ animationDelay: `${index * 70}ms` }}
-            >
-              <p className="text-xs font-semibold tracking-[0.12em] uppercase text-primary">{milestone.year}</p>
-              <h3 className="mt-2 text-lg font-semibold text-foreground">{milestone.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{milestone.desc}</p>
-            </article>
-          ))}
+      <section className="max-w-6xl mx-auto px-6 pb-14">
+        <div className="grid lg:grid-cols-2 gap-6">
+          <article className="reveal-up rounded-2xl border border-border bg-white p-6 sm:p-8 shadow-sm">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Target className="h-5 w-5" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground">Vision</h3>
+            <ul className="mt-4 space-y-3 text-foreground">
+              <li className="flex gap-2">
+                <span className="text-primary">•</span>
+                <span>
+                  To be the pioneer software development company in efficiency
+                  and innovation in South East Asia by 2025.
+                </span>
+              </li>
+            </ul>
+          </article>
+
+          <article
+            className="reveal-up rounded-2xl border border-border bg-white p-6 sm:p-8 shadow-sm"
+            style={{ animationDelay: "80ms" }}
+          >
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Lightbulb className="h-5 w-5" />
+            </div>
+            <h3 className="text-2xl font-bold text-foreground">Mission</h3>
+            <ul className="mt-4 space-y-3 text-foreground">
+              {MISSION_POINTS.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="text-primary">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 pb-14">
+        <article className="reveal-up rounded-2xl border border-border bg-white p-6 sm:p-8 shadow-sm">
+          <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Gem className="h-5 w-5" />
+          </div>
+          <h3 className="text-2xl font-bold text-foreground">Core Values</h3>
+          <p className="mt-4 text-foreground leading-relaxed">
+            Christo-centricity, Visionary, Leadership and Teamwork, Zeal,
+            Customer-centered, Meritocracy
+          </p>
+        </article>
+      </section>
+
+      <section className="px-6 pb-14">
+        <div className="max-w-6xl mx-auto reveal-up rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/15 via-primary/8 to-white px-6 py-10 sm:px-10 text-center shadow-sm">
+          <p className="text-xs font-semibold tracking-[0.14em] uppercase text-primary">
+            Philosophy
+          </p>
+          <p className="mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold italic text-foreground">
+            Innovate... Inspire... Sparkle...
+          </p>
         </div>
       </section>
 
       <section className="py-14 bg-gradient-to-br from-primary/20 via-primary/10 to-white">
         <div className="max-w-3xl mx-auto px-6 text-center reveal-up">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary mb-3">
-            <Sparkles className="h-5 w-5" />
-          </div>
           <h2 className="text-3xl font-bold text-foreground mb-3">
-            Ready to modernize your workforce workflow?
+            Build The Future With Sparkle
           </h2>
           <p className="text-muted-foreground mb-6">
-            Start a free trial or schedule a live walkthrough with our team.
+            Transform attendance into payroll-ready intelligence with a platform
+            built for growth and impact.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Link to="/get-started">
@@ -258,15 +197,11 @@ export default function About() {
                 Start Free Trial
               </Button>
             </Link>
-            <Link to="/contact">
+            <Link to="/features">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                Schedule Demo
+                Explore Features
               </Button>
             </Link>
-          </div>
-          <div className="mt-5 flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> No credit card required</span>
-            <span className="inline-flex items-center gap-1"><Clock3 className="h-3.5 w-3.5 text-primary" /> Fast onboarding support</span>
           </div>
         </div>
       </section>

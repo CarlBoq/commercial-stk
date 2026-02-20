@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 const SLIDE_INTERVAL_MS = 5000;
-const DEPLOYED_DASHBOARD_IMAGE = `${import.meta.env.BASE_URL}assets/HERO-DASHBOARD.png`;
+const CAROUSEL_BASE_PATH = `${import.meta.env.BASE_URL}assets/carousel`;
 
 type FloatingSlide = {
   src: string;
@@ -27,49 +27,49 @@ export function HomeCarousel() {
   const slides: FloatingSlide[] = useMemo(
     () => [
       // EDIT LINE: ~Floating Carousel Slide 1
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-1.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-01-live-team-dashboard.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-01-live-team-dashboard.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Live Team Dashboard",
         description: "Track attendance, lateness, and staffing at a glance.",
       },
       // EDIT LINE: ~Floating Carousel Slide 2
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-2.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-02-smart-shift-scheduling.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-02-smart-shift-scheduling.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Smart Shift Scheduling",
         description: "Build and adjust shifts quickly across departments.",
       },
       // EDIT LINE: ~Floating Carousel Slide 3
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-3.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-03-overtime-insights.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-03-overtime-insights.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Overtime Insights",
         description: "Monitor premium hours and overtime costs in real time.",
       },
       // EDIT LINE: ~Floating Carousel Slide 4
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-4.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-04-employee-self-service.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-04-employee-self-service.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Employee Self-Service",
         description: "Let staff view schedules and submit requests instantly.",
       },
       // EDIT LINE: ~Floating Carousel Slide 5
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-5.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-05-payroll-ready-reports.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-05-payroll-ready-reports.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Payroll-Ready Reports",
         description: "Export accurate summaries for payroll and compliance.",
       },
       // EDIT LINE: ~Floating Carousel Slide 6
-      // WHAT TO REPLACE: Replace /assets/PLACEHOLDER-FLOATING-6.png with real image
+      // WHAT TO REPLACE: Replace /assets/carousel/carousel-06-mobile-workforce-view.png with real image
       {
-        src: DEPLOYED_DASHBOARD_IMAGE,
+        src: `${CAROUSEL_BASE_PATH}/carousel-06-mobile-workforce-view.png`,
         alt: "Sparkle Timekeeping feature preview",
         title: "Mobile Workforce View",
         description: "Manage teams from anywhere with responsive tools.",
