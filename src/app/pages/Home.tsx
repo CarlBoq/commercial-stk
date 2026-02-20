@@ -97,15 +97,6 @@ const FEATURE_TABS = [
   },
 ];
 
-const LOGOS = [
-  "Northpoint Retail",
-  "MetroCare Clinics",
-  "Harborline Hotels",
-  "Vertex Foods",
-  "Summit Logistics",
-  "Clearview Services",
-];
-
 const STEPS = [
   {
     title: "Import your team",
@@ -424,26 +415,6 @@ export default function Home() {
                 className="h-[280px] w-full rounded-xl object-cover"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      <SectionDivider />
-
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-semibold tracking-[0.16em] uppercase text-muted-foreground mb-6">
-            Trusted by growing teams
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {LOGOS.map((brand) => (
-              <div
-                key={brand}
-                className="hover-lift rounded-lg border border-border bg-muted/30 px-4 py-3 text-center text-sm font-medium text-foreground"
-              >
-                {brand}
-              </div>
-            ))}
           </div>
         </div>
       </section>
