@@ -55,7 +55,7 @@ const FEATURE_TABS = [
       "Conflict detection before publish",
       "One-click notifications to employees",
     ],
-    image: "/assets/PLACEHOLDER-FLOATING-2.png",
+    image: DEPLOYED_DASHBOARD_IMAGE,
   },
   {
     id: "overtime",
@@ -68,7 +68,7 @@ const FEATURE_TABS = [
       "Rest-day and night differential support",
       "Payroll-ready exports with fewer edits",
     ],
-    image: "/assets/PLACEHOLDER-FLOATING-3.png",
+    image: DEPLOYED_DASHBOARD_IMAGE,
   },
   {
     id: "documents",
@@ -81,7 +81,7 @@ const FEATURE_TABS = [
       "Fast retrieval for audits and onboarding",
       "Role-based visibility by team",
     ],
-    image: "/assets/PLACEHOLDER-FLOATING-5.png",
+    image: DEPLOYED_DASHBOARD_IMAGE,
   },
   {
     id: "requests",
@@ -94,7 +94,7 @@ const FEATURE_TABS = [
       "Manager review queue and status tracking",
       "Clear employee status updates",
     ],
-    image: "/assets/PLACEHOLDER-FLOATING-4.png",
+    image: DEPLOYED_DASHBOARD_IMAGE,
   },
 ];
 
@@ -106,6 +106,8 @@ const LOGOS = [
   "Summit Logistics",
   "Clearview Services",
 ];
+
+const DEPLOYED_DASHBOARD_IMAGE = `${import.meta.env.BASE_URL}assets/HERO-DASHBOARD.png`;
 
 const STEPS = [
   {
@@ -154,7 +156,7 @@ function SectionDivider() {
 export default function Home() {
   const [activeFeature, setActiveFeature] = useState(FEATURE_TABS[0].id);
   const [showStickyCta, setShowStickyCta] = useState(false);
-  const heroImageSrc = "/assets/HERO-DASHBOARD.png";
+  const heroImageSrc = DEPLOYED_DASHBOARD_IMAGE;
 
   useEffect(() => {
     const onScroll = () => setShowStickyCta(window.scrollY > 420);
