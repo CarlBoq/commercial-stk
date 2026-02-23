@@ -532,7 +532,7 @@ export default function Home() {
             : "pointer-events-none translate-y-6 opacity-0"
         }`}
       >
-        <div className="rounded-xl border border-primary/25 bg-white/95 p-4 shadow-2xl backdrop-blur">
+        <div className="relative rounded-xl border border-primary/25 bg-white/95 p-4 shadow-2xl backdrop-blur">
           <button
             type="button"
             onClick={() => setDismissedStickyCta(true)}
