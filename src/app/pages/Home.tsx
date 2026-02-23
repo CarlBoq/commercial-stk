@@ -9,6 +9,7 @@ import {
   Hourglass,
   ShieldCheck,
   Users,
+  X,
   Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -169,6 +170,7 @@ function SectionDivider() {
 export default function Home() {
   const [activeFeature, setActiveFeature] = useState(FEATURE_TABS[0].id);
   const [showStickyCta, setShowStickyCta] = useState(false);
+  const [dismissedStickyCta, setDismissedStickyCta] = useState(false);
   const heroImageSrc = DEPLOYED_DASHBOARD_IMAGE;
   const handlePricingScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -182,6 +184,10 @@ export default function Home() {
     const SHOW_AT = 520;
     const HIDE_AT = 420;
     const onScroll = () => {
+      if (dismissedStickyCta) {
+        setShowStickyCta(false);
+        return;
+      }
       setShowStickyCta((prev) => {
         if (!prev && window.scrollY > SHOW_AT) return true;
         if (prev && window.scrollY < HIDE_AT) return false;
@@ -191,7 +197,7 @@ export default function Home() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [dismissedStickyCta]);
 
   useEffect(() => {
     const revealTargets = Array.from(
@@ -527,6 +533,14 @@ export default function Home() {
         }`}
       >
         <div className="rounded-xl border border-primary/25 bg-white/95 p-4 shadow-2xl backdrop-blur">
+          <button
+            type="button"
+            onClick={() => setDismissedStickyCta(true)}
+            aria-label="Close launch prompt"
+            className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
           <p className="text-sm font-semibold text-foreground">
             Ready to launch Sparkle?
           </p>
