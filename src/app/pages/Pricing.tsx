@@ -5,10 +5,28 @@ import { Link } from "react-router-dom";
 
 const plans = [
   {
-    name: "Starter Plan",
-    price: "PHP 19",
+    name: "Free Plan",
+    monthlyPrice: 0,
+    annualPrice: 0,
     period: "per employee/month",
-    audience: "For growing teams that need payroll-ready accuracy",
+    audience: "Best for individuals & very small teams starting out",
+    features: [
+      "Basic clock-in / check-out",
+      "Basic Daily Time Record (DTR)",
+      "Attendance logs",
+      "CSV report extraction",
+      "30-day history",
+    ],
+    unique: "Free forever. No credit card required.",
+    cta: "Get Started",
+    isFree: true,
+  },
+  {
+    name: "Starter Plan",
+    monthlyPrice: 19,
+    annualPrice: 15,
+    period: "per employee/month",
+    audience: "For small teams needing reliable timekeeping",
     features: [
       "Digital clock-in / clock-out",
       "Selfie with timestamp",
@@ -25,10 +43,13 @@ const plans = [
       "Technical support",
     ],
     unique: "Built for reliable attendance-to-payroll workflows.",
+    cta: "Choose Plan",
+    isFree: false,
   },
   {
     name: "Growth Plan",
-    price: "PHP 29",
+    monthlyPrice: 39,
+    annualPrice: 31,
     period: "per employee/month",
     audience: "Most Popular",
     features: [
@@ -49,12 +70,15 @@ const plans = [
       "201 employee file management",
     ],
     unique: "Best for teams scaling workforce visibility and controls.",
+    cta: "Choose Plan",
+    isFree: false,
   },
   {
     name: "Enterprise Plan",
-    price: "PHP 49",
+    monthlyPrice: 49,
+    annualPrice: 39,
     period: "per employee/month",
-    audience: "For advanced workforce and payroll operations",
+    audience: "For large or multi-branch organizations",
     features: [
       "Digital clock-in / clock-out",
       "Selfie with timestamp",
@@ -79,13 +103,15 @@ const plans = [
       "Optional fully-managed payroll services (with dedicated payroll head)",
     ],
     unique: "Complete package for enterprise-grade payroll operations.",
+    cta: "Contact Sales",
+    isFree: false,
   },
 ];
 
 const faqs = [
   {
     q: "Can I try Sparkle before committing?",
-    a: "Yes. Every plan comes with a 14-day free trial and no credit card required.",
+    a: "Yes. Start with our Free Plan — no credit card required. You can upgrade anytime.",
   },
   {
     q: "What payment methods do you accept?",
@@ -106,68 +132,109 @@ const faqs = [
 ];
 
 const tableFeatures = [
-  { label: "Digital clock-in / clock-out", keys: [true, true, true] },
-  { label: "Selfie with timestamp", keys: [true, true, true] },
-  { label: "GPS & geo-fencing", keys: [true, true, true] },
-  { label: "Attendance creation", keys: [true, true, true] },
-  { label: "Basic attendance & breaklist reports", keys: [true, true, true] },
-  { label: "CSV report extraction", keys: [true, true, true] },
-  { label: "Biometric-ready", keys: [true, true, true] },
-  { label: "Payroll computation", keys: [true, true, true] },
-  { label: "Payroll-ready DTR", keys: [true, true, true] },
-  { label: "Payslip generation", keys: [true, true, true] },
-  { label: "Technical support", keys: [true, true, true] },
-  { label: "Premium hours submissions (OT, NSD, RD)", keys: [true, true, true] },
+  { label: "Basic clock-in / check-out", keys: [true, true, true, true] },
+  { label: "Basic Daily Time Record (DTR)", keys: [true, true, true, true] },
+  { label: "Attendance logs", keys: [true, true, true, true] },
+  { label: "CSV report extraction", keys: [true, true, true, true] },
+  { label: "30-day history", keys: [true, false, false, false] },
+  { label: "Selfie with timestamp", keys: [false, true, true, true] },
+  { label: "GPS & geo-fencing", keys: [false, true, true, true] },
+  { label: "Attendance creation", keys: [false, true, true, true] },
+  { label: "Basic attendance & breaklist reports", keys: [false, true, true, true] },
+  { label: "Biometric-ready", keys: [false, true, true, true] },
+  { label: "Payroll computation", keys: [false, true, true, true] },
+  { label: "Payroll-ready DTR", keys: [false, true, true, true] },
+  { label: "Payslip generation", keys: [false, true, true, true] },
+  { label: "Technical support", keys: [false, true, true, true] },
+  { label: "Premium hours submissions (OT, NSD, RD)", keys: [false, true, true, true] },
   {
     label: "Automated premium pay and additional allowances computation",
-    keys: [true, true, true],
+    keys: [false, true, true, true],
   },
-  { label: "Schedule confirmation & shift management", keys: [false, true, true] },
-  { label: "201 employee file management", keys: [false, true, true] },
+  { label: "Schedule confirmation & shift management", keys: [false, false, true, true] },
+  { label: "201 employee file management", keys: [false, false, true, true] },
   {
     label: "Company tools (Profile, Code of Conduct, Company videos)",
-    keys: [false, false, true],
+    keys: [false, false, false, true],
   },
-  { label: "Training videos & module management", keys: [false, false, true] },
-  { label: "Multi-process request management", keys: [false, false, true] },
-  { label: "Advanced & FGI report extraction", keys: [false, false, true] },
-  { label: "Automated billing creation", keys: [false, false, true] },
-  { label: "Optional fully-managed payroll services", keys: [false, false, true] },
+  { label: "Training videos & module management", keys: [false, false, false, true] },
+  { label: "Multi-process request management", keys: [false, false, false, true] },
+  { label: "Advanced & FGI report extraction", keys: [false, false, false, true] },
+  { label: "Automated billing creation", keys: [false, false, false, true] },
+  { label: "Optional fully-managed payroll services", keys: [false, false, false, true] },
 ];
 
 export default function Pricing() {
+  const [isAnnual, setIsAnnual] = useState(false);
   const [showMobileComparison, setShowMobileComparison] = useState(false);
+
+  const getPrice = (plan: (typeof plans)[0]) => {
+    if (plan.isFree) return "₱0";
+    const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
+    return `₱${price}`;
+  };
 
   return (
     <div className="min-h-screen bg-muted/20 py-16">
-      <section className="max-w-4xl mx-auto px-6 text-center mb-16">
+      <section className="max-w-4xl mx-auto px-6 text-center mb-10">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-          PRICING PACKAGES
+          Simple, Transparent Pricing
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          Choose the plan that fits your workforce and payroll operations.
+          Choose the plan that fits your team
         </p>
+
+        {/* Billing Toggle */}
+        <div className="flex justify-center">
+          <div className="inline-flex items-center bg-muted rounded-full p-1 gap-1">
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                !isAnnual ? "bg-white shadow text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                isAnnual ? "bg-white shadow text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Annual{" "}
+              <span className="text-primary font-semibold">(Save 20%)</span>
+            </button>
+          </div>
+        </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 mb-16 grid md:grid-cols-3 gap-8">
+      <section className="max-w-6xl mx-auto px-6 mb-16 grid md:grid-cols-4 gap-6">
         {plans.map((plan, i) => (
           <div
             key={plan.name}
-            className={`bg-white rounded-xl border border-border shadow p-8 flex flex-col items-center text-center gap-4 ${
-              i === 1 ? "ring-2 ring-primary" : ""
+            className={`bg-white rounded-xl border border-border shadow p-6 flex flex-col items-center text-center gap-4 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl ${
+              i === 2 ? "ring-2 ring-primary" : ""
             }`}
           >
-            <span className="uppercase text-xs font-bold tracking-widest text-primary mb-2">
+            {i === 2 && (
+              <span className="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded-full -mt-2">
+                Most Popular
+              </span>
+            )}
+            <span className="uppercase text-xs font-bold tracking-widest text-primary">
               {plan.name}
             </span>
             <div className="text-4xl font-bold text-foreground">
-              {plan.price}{" "}
+              {getPrice(plan)}{" "}
               <span className="text-base font-normal text-muted-foreground">
-                /{plan.period}
+                /{plan.isFree ? "free forever" : plan.period}
               </span>
             </div>
-            <div className="text-sm text-muted-foreground mb-2">{plan.audience}</div>
-            <ul className="text-left text-sm mb-4 space-y-2 w-full">
+            {isAnnual && !plan.isFree && (
+              <p className="text-xs text-primary -mt-2">billed annually</p>
+            )}
+            <div className="text-sm text-muted-foreground">{plan.audience}</div>
+            <ul className="text-left text-sm mb-2 space-y-2 w-full">
               {plan.features.map((feature, idx) => (
                 <li
                   key={feature}
@@ -185,12 +252,20 @@ export default function Pricing() {
                 +{plan.features.length - 7} more features in this plan
               </p>
             )}
-            <div className="text-xs text-muted-foreground mb-4">{plan.unique}</div>
-            <Link to="/get-started">
-              <Button size="lg" variant={i === 1 ? "default" : "outline"}>
-                {i === 2 ? "Contact Sales" : "Start Free Trial"}
-              </Button>
-            </Link>
+            <div className="text-xs text-muted-foreground mb-2">{plan.unique}</div>
+            {plan.cta === "Contact Sales" ? (
+              <a href="mailto:sales@sparkletimekeeping.com" className="w-full">
+                <Button size="lg" variant="outline" className="w-full">
+                  Contact Sales
+                </Button>
+              </a>
+            ) : (
+              <Link to="/get-started" className="w-full">
+                <Button size="lg" variant={i === 2 ? "default" : "outline"} className="w-full">
+                  {plan.cta}
+                </Button>
+              </Link>
+            )}
           </div>
         ))}
       </section>
@@ -223,7 +298,7 @@ export default function Pricing() {
                   <th
                     key={plan.name}
                     className={`p-3 text-center text-sm font-semibold border-b border-border ${
-                      idx === 1 ? "bg-primary/10 text-primary" : "text-foreground"
+                      idx === 2 ? "bg-primary/10 text-primary" : "text-foreground"
                     }`}
                   >
                     {plan.name}
@@ -239,7 +314,7 @@ export default function Pricing() {
                     <td
                       key={`${feature.label}-${j}`}
                       className={`p-3 text-center align-middle ${
-                        j === 1 ? "bg-primary/10" : ""
+                        j === 2 ? "bg-primary/10" : ""
                       }`}
                     >
                       {hasFeature ? (
@@ -277,9 +352,9 @@ export default function Pricing() {
         <p className="text-muted-foreground mb-6">
           Contact our sales team for enterprise pricing, integrations, or tailored onboarding.
         </p>
-        <Link to="/get-started">
+        <a href="mailto:sales@sparkletimekeeping.com">
           <Button size="lg">Contact Sales</Button>
-        </Link>
+        </a>
       </section>
 
       <footer className="text-center text-xs text-muted-foreground py-4">

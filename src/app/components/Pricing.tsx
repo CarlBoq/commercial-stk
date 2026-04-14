@@ -7,10 +7,28 @@ import { Badge } from "./ui/badge";
 
 const plans = [
   {
-    name: "Starter Plan",
-    price: "PHP 19",
+    name: "Free Plan",
+    monthlyPrice: 0,
+    annualPrice: 0,
     period: "per employee/month",
-    description: "For growing teams that need payroll-ready accuracy",
+    description: "Best for individuals & very small teams starting out",
+    features: [
+      "Basic clock-in / check-out",
+      "Basic Daily Time Record (DTR)",
+      "Attendance logs",
+      "CSV report extraction",
+      "30-day history",
+    ],
+    cta: "Get Started",
+    popular: false,
+    isFree: true,
+  },
+  {
+    name: "Starter Plan",
+    monthlyPrice: 19,
+    annualPrice: 15,
+    period: "per employee/month",
+    description: "For small teams needing reliable timekeeping",
     features: [
       "Digital clock-in / clock-out",
       "Selfie with timestamp",
@@ -26,12 +44,14 @@ const plans = [
       "Automated premium pay and additional allowances computation",
       "Technical support",
     ],
-    cta: "Get Started",
+    cta: "Choose Plan",
     popular: false,
+    isFree: false,
   },
   {
     name: "Growth Plan",
-    price: "PHP 29",
+    monthlyPrice: 39,
+    annualPrice: 31,
     period: "per employee/month",
     description: "Most Popular",
     features: [
@@ -51,14 +71,16 @@ const plans = [
       "Schedule confirmation & shift management",
       "201 employee file management",
     ],
-    cta: "Start Free Trial",
+    cta: "Choose Plan",
     popular: true,
+    isFree: false,
   },
   {
     name: "Enterprise Plan",
-    price: "PHP 49",
+    monthlyPrice: 49,
+    annualPrice: 39,
     period: "per employee/month",
-    description: "For advanced workforce and payroll operations",
+    description: "For large or multi-branch organizations",
     features: [
       "Digital clock-in / clock-out",
       "Selfie with timestamp",
@@ -84,61 +106,97 @@ const plans = [
     ],
     cta: "Contact Sales",
     popular: false,
+    isFree: false,
   },
 ];
 
 const comparisonRows = [
-  { feature: "Digital clock-in / clock-out", basic: true, standard: true, premium: true },
-  { feature: "Selfie with timestamp", basic: true, standard: true, premium: true },
-  { feature: "GPS & geo-fencing", basic: true, standard: true, premium: true },
-  { feature: "Attendance creation", basic: true, standard: true, premium: true },
-  { feature: "Basic attendance & breaklist reports", basic: true, standard: true, premium: true },
-  { feature: "CSV report extraction", basic: true, standard: true, premium: true },
-  { feature: "Biometric-ready", basic: true, standard: true, premium: true },
-  { feature: "Payroll computation", basic: true, standard: true, premium: true },
-  { feature: "Payroll-ready DTR", basic: true, standard: true, premium: true },
-  { feature: "Payslip generation", basic: true, standard: true, premium: true },
-  { feature: "Technical support", basic: true, standard: true, premium: true },
-  { feature: "Premium hours submissions (OT, NSD, RD)", basic: true, standard: true, premium: true },
+  { feature: "Basic clock-in / check-out", free: true, basic: true, standard: true, premium: true },
+  { feature: "Basic Daily Time Record (DTR)", free: true, basic: true, standard: true, premium: true },
+  { feature: "Attendance logs", free: true, basic: true, standard: true, premium: true },
+  { feature: "CSV report extraction", free: true, basic: true, standard: true, premium: true },
+  { feature: "30-day history", free: true, basic: false, standard: false, premium: false },
+  { feature: "Selfie with timestamp", free: false, basic: true, standard: true, premium: true },
+  { feature: "GPS & geo-fencing", free: false, basic: true, standard: true, premium: true },
+  { feature: "Attendance creation", free: false, basic: true, standard: true, premium: true },
+  { feature: "Basic attendance & breaklist reports", free: false, basic: true, standard: true, premium: true },
+  { feature: "Biometric-ready", free: false, basic: true, standard: true, premium: true },
+  { feature: "Payroll computation", free: false, basic: true, standard: true, premium: true },
+  { feature: "Payroll-ready DTR", free: false, basic: true, standard: true, premium: true },
+  { feature: "Payslip generation", free: false, basic: true, standard: true, premium: true },
+  { feature: "Technical support", free: false, basic: true, standard: true, premium: true },
+  { feature: "Premium hours submissions (OT, NSD, RD)", free: false, basic: true, standard: true, premium: true },
   {
     feature: "Automated premium pay and additional allowances computation",
+    free: false,
     basic: true,
     standard: true,
     premium: true,
   },
-  { feature: "Schedule confirmation & shift management", basic: false, standard: true, premium: true },
-  { feature: "201 employee file management", basic: false, standard: true, premium: true },
+  { feature: "Schedule confirmation & shift management", free: false, basic: false, standard: true, premium: true },
+  { feature: "201 employee file management", free: false, basic: false, standard: true, premium: true },
   {
     feature: "Company tools (Profile, Code of Conduct, Company videos)",
+    free: false,
     basic: false,
     standard: false,
     premium: true,
   },
-  { feature: "Training videos & module management", basic: false, standard: false, premium: true },
-  { feature: "Multi-process request management", basic: false, standard: false, premium: true },
-  { feature: "Advanced & FGI report extraction", basic: false, standard: false, premium: true },
-  { feature: "Automated billing creation", basic: false, standard: false, premium: true },
-  { feature: "Optional fully-managed payroll services", basic: false, standard: false, premium: true },
+  { feature: "Training videos & module management", free: false, basic: false, standard: false, premium: true },
+  { feature: "Multi-process request management", free: false, basic: false, standard: false, premium: true },
+  { feature: "Advanced & FGI report extraction", free: false, basic: false, standard: false, premium: true },
+  { feature: "Automated billing creation", free: false, basic: false, standard: false, premium: true },
+  { feature: "Optional fully-managed payroll services", free: false, basic: false, standard: false, premium: true },
 ];
 
 export function Pricing() {
+  const [isAnnual, setIsAnnual] = useState(false);
   const [showMobileComparison, setShowMobileComparison] = useState(false);
+
+  const getPrice = (plan: (typeof plans)[0]) => {
+    if (plan.isFree) return "₱0";
+    const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
+    return `₱${price}`;
+  };
 
   return (
     <section id="pricing" className="py-24 bg-muted/30">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">PRICING PACKAGES</h2>
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-4xl font-bold text-foreground mb-4">Simple, Transparent Pricing</h2>
           <p className="text-lg text-muted-foreground">
-            Choose the plan that fits your workforce and payroll operations.
+            Choose the plan that fits your team
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        {/* Billing Toggle */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex items-center bg-muted rounded-full p-1 gap-1">
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                !isAnnual ? "bg-white shadow text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                isAnnual ? "bg-white shadow text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Annual{" "}
+              <span className="text-primary font-semibold">(Save 20%)</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
           {plans.map((plan) => (
             <Card
               key={plan.name}
-              className={`relative ${plan.popular ? "border-primary shadow-xl scale-105" : "border-border"}`}
+              className={`relative transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl ${plan.popular ? "border-primary shadow-md" : "border-border"}`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -146,24 +204,31 @@ export function Pricing() {
                 </div>
               )}
 
-              <CardHeader className="text-center p-8 pb-6">
-                <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+              <CardHeader className="text-center p-6 pb-4">
+                <h3 className="text-xl font-bold text-foreground mb-2">{plan.name}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
-                <div className="mb-2">
-                  <span className="text-5xl font-bold text-foreground">{plan.price}</span>
+                <div className="mb-1">
+                  <span className="text-4xl font-bold text-foreground">{getPrice(plan)}</span>
                 </div>
-                <p className="text-muted-foreground text-sm">{plan.period}</p>
+                <p className="text-muted-foreground text-xs">{plan.isFree ? "free forever" : plan.period}</p>
+                {isAnnual && !plan.isFree && (
+                  <p className="text-xs text-primary mt-1">billed annually</p>
+                )}
               </CardHeader>
 
-              <CardContent className="p-8 pt-0">
+              <CardContent className="p-6 pt-0">
                 <Button className="w-full mb-6" variant={plan.popular ? "default" : "outline"} size="lg">
                   {plan.cta === "Contact Sales" ? (
                     <a href="mailto:sales@sparkletimekeeping.com" style={{ display: "block", width: "100%" }}>
                       Contact Sales
                     </a>
+                  ) : plan.cta === "Choose Plan" ? (
+                    <Link to="/get-started" style={{ display: "block", width: "100%" }}>
+                      Choose Plan
+                    </Link>
                   ) : (
                     <Link to="/get-started" style={{ display: "block", width: "100%" }}>
-                      {plan.cta}
+                      Get Started
                     </Link>
                   )}
                 </Button>
@@ -217,6 +282,7 @@ export function Pricing() {
                 <thead>
                   <tr className="border-b border-border">
                     <th className="text-left py-4 px-4 text-foreground font-semibold">Feature</th>
+                    <th className="text-center py-4 px-4 text-foreground font-semibold">Free</th>
                     <th className="text-center py-4 px-4 text-foreground font-semibold">Starter</th>
                     <th className="text-center py-4 px-4 text-foreground font-semibold">Growth</th>
                     <th className="text-center py-4 px-4 text-foreground font-semibold">Enterprise</th>
@@ -226,6 +292,9 @@ export function Pricing() {
                   {comparisonRows.map((row) => (
                     <tr key={row.feature} className="border-b border-border last:border-0">
                       <td className="py-4 px-4 text-foreground">{row.feature}</td>
+                      <td className="py-4 px-4 text-center">
+                        {row.free ? <Check className="w-5 h-5 text-primary mx-auto" /> : <span className="text-muted-foreground">-</span>}
+                      </td>
                       <td className="py-4 px-4 text-center">
                         {row.basic ? <Check className="w-5 h-5 text-primary mx-auto" /> : <span className="text-muted-foreground">-</span>}
                       </td>

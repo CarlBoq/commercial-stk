@@ -138,23 +138,43 @@ const FEATURED_SERVICES = [
 const PARTNERS = [
   {
     name: "Jollibee Franchise Stores",
-    src: `${import.meta.env.BASE_URL}assets/jollibee.png`,
+    src: `${import.meta.env.BASE_URL}assets/partners/jollibee.png`,
   },
   {
-    name: "Pepper Lunch Franchise Store",
-    src: `${import.meta.env.BASE_URL}assets/pepper-lunch.png`,
+    name: "Pepper Lunch Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/pepper-lunch.png`,
   },
   {
     name: "EBC",
-    src: `${import.meta.env.BASE_URL}assets/ebc.png`,
+    src: `${import.meta.env.BASE_URL}assets/partners/ebc.png`,
   },
   {
     name: "K-HIANG",
-    src: `${import.meta.env.BASE_URL}assets/khiang.png`,
+    src: `${import.meta.env.BASE_URL}assets/partners/khiang.png`,
   },
   {
     name: "7-STAR",
-    src: `${import.meta.env.BASE_URL}assets/7star.png`,
+    src: `${import.meta.env.BASE_URL}assets/partners/7star.png`,
+  },
+  {
+    name: "Mang Inasal Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/mang-inasal.png`,
+  },
+  {
+    name: "Chowking Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/chowking.png`,
+  },
+  {
+    name: "Greenwich Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/greenwich.png`,
+  },
+  {
+    name: "Red Ribbon Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/red-ribbon.webp`,
+  },
+  {
+    name: "Popeyes Franchise Stores",
+    src: `${import.meta.env.BASE_URL}assets/partners/popeyes.png`,
   },
 ];
 
@@ -471,27 +491,32 @@ export default function Home() {
 
       <SectionDivider />
 
-      <section className="py-16 bg-muted/25">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-16 bg-muted/25 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 mb-10">
           <h2 className="text-3xl font-bold text-foreground mb-3 text-center">
             OUR CLIENT PARTNERS
           </h2>
-          <p className="text-center text-muted-foreground mb-10">
+          <p className="text-center text-muted-foreground">
             Trusted organizations growing with Sparkle Timekeeping
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {PARTNERS.map((partner, index) => (
+        </div>
+        <div className="relative overflow-hidden">
+          {/* Left fade */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-muted/25 to-transparent" />
+          {/* Right fade */}
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10 bg-gradient-to-l from-muted/25 to-transparent" />
+          <div className="flex animate-marquee gap-5 w-max">
+            {[...PARTNERS, ...PARTNERS].map((partner, index) => (
               <article
-                key={partner.name}
-                className="group reveal-up rounded-2xl border border-border/80 bg-white/90 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/40 text-center flex flex-col items-center justify-center min-h-[160px] sm:min-h-[180px]"
-                style={{ animationDelay: `${index * 70}ms` }}
+                key={index}
+                className="group rounded-2xl border border-border/80 bg-white/90 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/40 text-center flex flex-col items-center justify-center min-h-[160px] w-[180px] flex-shrink-0"
               >
                 <ImageWithFallback
                   src={partner.src}
                   alt={partner.name}
-                  className="h-16 sm:h-20 w-full object-contain grayscale-0 opacity-100 sm:grayscale sm:opacity-75 transition-all duration-300 ease-in-out sm:group-hover:grayscale-0 sm:group-hover:opacity-100"
+                  className="h-16 w-full object-contain grayscale opacity-75 transition-all duration-300 ease-in-out group-hover:grayscale-0 group-hover:opacity-100"
                 />
-                <p className="mt-3 sm:mt-4 text-sm sm:text-base font-medium text-foreground sm:text-foreground/80 transition-colors duration-300 sm:group-hover:text-foreground">
+                <p className="mt-3 text-sm font-medium text-foreground/80 transition-colors duration-300 group-hover:text-foreground">
                   {partner.name}
                 </p>
               </article>
