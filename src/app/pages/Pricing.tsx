@@ -135,7 +135,6 @@ const tableFeatures = [
   { label: "Basic Daily Time Record (DTR)", keys: [true, true, true, true] },
   { label: "Attendance logs", keys: [true, true, true, true] },
   { label: "CSV report extraction", keys: [true, true, true, true] },
-  { label: "30-day history", keys: [true, false, false, false] },
   { label: "Selfie with timestamp", keys: [false, true, true, true] },
   { label: "GPS & geo-fencing", keys: [false, true, true, true] },
   { label: "Attendance creation", keys: [false, true, true, true] },
