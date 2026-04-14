@@ -114,7 +114,6 @@ const comparisonRows = [
   { feature: "Basic Daily Time Record (DTR)", free: true, basic: true, standard: true, premium: true },
   { feature: "Attendance logs", free: true, basic: true, standard: true, premium: true },
   { feature: "CSV report extraction", free: true, basic: true, standard: true, premium: true },
-  { feature: "30-day history", free: true, basic: false, standard: false, premium: false },
   { feature: "Selfie with timestamp", free: false, basic: true, standard: true, premium: true },
   { feature: "GPS & geo-fencing", free: false, basic: true, standard: true, premium: true },
   { feature: "Attendance creation", free: false, basic: true, standard: true, premium: true },
