@@ -15,7 +15,6 @@ const plans = [
       "Basic Daily Time Record (DTR)",
       "Attendance logs",
       "CSV report extraction",
-      "30-day history",
     ],
     unique: "Free forever. No credit card required.",
     cta: "Get Started",

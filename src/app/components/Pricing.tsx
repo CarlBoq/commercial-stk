@@ -17,7 +17,6 @@ const plans = [
       "Basic Daily Time Record (DTR)",
       "Attendance logs",
       "CSV report extraction",
-      "30-day history",
     ],
     cta: "Get Started",
     popular: false,
