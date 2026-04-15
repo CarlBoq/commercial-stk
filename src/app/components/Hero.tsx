@@ -23,12 +23,12 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/get-started">
+              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="text-base gap-2">
                   Get Started Free
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
+              </a>
               <Link to="/demo">
                 <Button size="lg" variant="outline" className="text-base gap-2">
                   <Play className="w-4 h-4" />

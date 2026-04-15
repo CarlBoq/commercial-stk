@@ -67,9 +67,9 @@ export default function FeatureDetail() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/get-started">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button>Get Started</Button>
-            </Link>
+            </a>
             <a href="/#pricing">
               <Button variant="outline">View Pricing</Button>
             </a>

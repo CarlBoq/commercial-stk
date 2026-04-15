@@ -192,11 +192,11 @@ export default function About() {
             built for growth and impact.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <Link to="/get-started">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="w-full sm:w-auto">
-                Start Free Trial
+                Get Started
               </Button>
-            </Link>
+            </a>
             <Link to="/features">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Explore Features

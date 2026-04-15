@@ -365,15 +365,12 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <ManualModal />
-            <Link to="/sign-in" onClick={(e) => handleNavClick(e, "/sign-in")}>
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost">Sign In</Button>
-            </Link>
-            <Link
-              to="/get-started"
-              onClick={(e) => handleNavClick(e, "/get-started")}
-            >
+            </a>
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button>Get Started</Button>
-            </Link>
+            </a>
           </div>
 
           <button
@@ -466,20 +463,14 @@ export function Navbar() {
               <div className="col-span-2">
                 <ManualModal compact triggerClassName="w-full justify-center" />
               </div>
-              <Link
-                to="/sign-in"
-                onClick={(e) => handleNavClick(e, "/sign-in")}
-              >
+              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button variant="ghost" className="w-full">
                   Sign In
                 </Button>
-              </Link>
-              <Link
-                to="/get-started"
-                onClick={(e) => handleNavClick(e, "/get-started")}
-              >
+              </a>
+              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button className="w-full">Get Started</Button>
-              </Link>
+              </a>
             </div>
           </div>
         )}

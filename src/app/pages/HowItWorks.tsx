@@ -290,11 +290,11 @@ export default function HowItWorks() {
             Start your trial or view pricing to choose the right Sparkle plan.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <Link to="/get-started">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="w-full sm:w-auto">
-                Start Free Trial
+                Get Started
               </Button>
-            </Link>
+            </a>
             <Link to="/pricing">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 View Pricing
@@ -315,11 +315,11 @@ export default function HowItWorks() {
             Explore the platform flow with a live product demo.
           </p>
           <div className="flex gap-2">
-            <Link to="/get-started" className="flex-1">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button size="sm" className="w-full">
-                Start Trial
+                Get Started
               </Button>
-            </Link>
+            </a>
             <Link to="/pricing" className="flex-1">
               <Button size="sm" variant="outline" className="w-full">
                 Pricing

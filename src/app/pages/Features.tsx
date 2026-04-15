@@ -50,9 +50,9 @@ export default function Features() {
         <p className="text-muted-foreground mb-6">
           See how these features can transform workforce management.
         </p>
-        <Link to="/get-started">
+        <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
           <Button size="lg">Get Started</Button>
-        </Link>
+        </a>
       </section>
 
       <footer className="text-center text-xs text-muted-foreground py-4">

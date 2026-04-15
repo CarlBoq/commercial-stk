@@ -258,11 +258,11 @@ export default function Pricing() {
                 </Button>
               </a>
             ) : (
-              <Link to="/get-started" className="w-full">
+              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button size="lg" variant={i === 2 ? "default" : "outline"} className="w-full">
                   {plan.cta}
                 </Button>
-              </Link>
+              </a>
             )}
           </div>
         ))}

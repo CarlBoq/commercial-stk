@@ -263,11 +263,11 @@ export default function Home() {
               Accurate. Automated. Compliant.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link to="/get-started">
+              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="w-full sm:w-auto">
-                  Start Free Trial
+                  Get Started
                 </Button>
-              </Link>
+              </a>
               <a href="#pricing" onClick={handlePricingScroll}>
                 <Button
                   size="lg"
@@ -536,11 +536,11 @@ export default function Home() {
             Start your free trial or request a demo and see Sparkle in action.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <Link to="/get-started">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="w-full sm:w-auto">
-                Start Free Trial
+                Get Started
               </Button>
-            </Link>
+            </a>
             <a href="#pricing" onClick={handlePricingScroll}>
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Book a Demo
@@ -573,11 +573,11 @@ export default function Home() {
             Start your trial or see a live demo.
           </p>
           <div className="flex gap-2">
-            <Link to="/get-started" className="flex-1">
+            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button size="sm" className="w-full">
-                Start Trial
+                Get Started
               </Button>
-            </Link>
+            </a>
             <a href="#pricing" className="flex-1" onClick={handlePricingScroll}>
               <Button size="sm" variant="outline" className="w-full">
                 View Pricing

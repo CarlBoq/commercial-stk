@@ -17,12 +17,12 @@ export function CTA() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/get-started">
+          <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
             <Button size="lg" variant="secondary" className="text-base gap-2">
-              Start Free Trial
+              Get Started
               <ArrowRight className="w-4 h-4" />
             </Button>
-          </Link>
+          </a>
           <Link to="/demo">
             <Button size="lg" variant="outline" className="text-base bg-white/10 text-white border-white/30 hover:bg-white/20">
               Schedule a Demo

@@ -221,13 +221,13 @@ export function Pricing() {
                       Contact Sales
                     </a>
                   ) : plan.cta === "Choose Plan" ? (
-                    <Link to="/get-started" style={{ display: "block", width: "100%" }}>
+                    <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" style={{ display: "block", width: "100%" }}>
                       Choose Plan
-                    </Link>
+                    </a>
                   ) : (
-                    <Link to="/get-started" style={{ display: "block", width: "100%" }}>
+                    <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" style={{ display: "block", width: "100%" }}>
                       Get Started
-                    </Link>
+                    </a>
                   )}
                 </Button>
 
