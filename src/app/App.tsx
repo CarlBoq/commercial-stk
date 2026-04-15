@@ -9,8 +9,6 @@ import FeatureDetail from "./pages/FeatureDetail";
 import HowItWorks from "./pages/HowItWorks";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
-import SignIn from "./pages/SignIn";
-import GetStarted from "./pages/GetStarted";
 import Integrations from "./pages/Integrations";
 import Updates from "./pages/Updates";
 import Careers from "./pages/Careers";
@@ -35,8 +33,6 @@ export default function App() {
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/get-started" element={<GetStarted />} />
             <Route path="/integrations" element={<Integrations />} />
             <Route path="/updates" element={<Updates />} />
             <Route path="/careers" element={<Careers />} />
