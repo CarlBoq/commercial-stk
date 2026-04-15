@@ -7,6 +7,7 @@ import {
   Crosshair,
   FileText,
   Hourglass,
+  Play,
   ShieldCheck,
   Users,
   X,
@@ -567,15 +568,16 @@ export default function Home() {
             <X className="h-4 w-4" />
           </button>
           <p className="text-sm font-semibold text-foreground">
-            Ready to launch Sparkle?
+            Try Demo
           </p>
           <p className="text-xs text-muted-foreground mt-1 mb-3">
-            Start your trial or see a live demo.
+            See Sparkle in action with a live demo.
           </p>
           <div className="flex gap-2">
             <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="flex-1">
-              <Button size="sm" className="w-full">
-                Get Started
+              <Button size="sm" className="w-full gap-1.5">
+                <Play className="h-3 w-3 fill-current" />
+                Try Demo
               </Button>
             </a>
             <a href="#pricing" className="flex-1" onClick={handlePricingScroll}>

@@ -5,9 +5,12 @@ import {
   FileCheck2,
   FileText,
   Gauge,
+  LogIn,
   Menu,
+  Play,
   ReceiptText,
   ShieldCheck,
+  UserPlus,
   X,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -107,11 +110,14 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopFeaturesOpen, setDesktopFeaturesOpen] = useState(false);
   const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState(false);
+  const signInRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMobileOpen(false);
     setDesktopFeaturesOpen(false);
     setMobileFeaturesOpen(false);
+    setSignInOpen(false);
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
@@ -135,6 +141,17 @@ export function Navbar() {
         window.clearTimeout(featuresCloseTimerRef.current);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const onPointerDown = (event: globalThis.MouseEvent) => {
+      const target = event.target as Node;
+      if (signInRef.current && !signInRef.current.contains(target)) {
+        setSignInOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
   }, []);
 
   const openFeaturesMenu = () => {
@@ -365,11 +382,50 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <ManualModal />
+
+            {/* Sign In Dropdown */}
+            <div ref={signInRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setSignInOpen((prev) => !prev)}
+                className="inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
+              >
+                Sign In
+                <ChevronDown className={`h-4 w-4 transition-transform ${signInOpen ? "rotate-180" : ""}`} />
+              </button>
+              {signInOpen && (
+                <div className="absolute right-0 top-[calc(100%+0.4rem)] z-50 w-48 rounded-xl border border-border bg-white shadow-xl overflow-hidden">
+                  <a
+                    href="https://sparkletimekeeping.com/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted/50 transition-colors"
+                    onClick={() => setSignInOpen(false)}
+                  >
+                    <LogIn className="h-4 w-4 text-primary" />
+                    Sign In
+                  </a>
+                  <div className="h-px bg-border" />
+                  <a
+                    href="https://sparkletimekeeping.com/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted/50 transition-colors"
+                    onClick={() => setSignInOpen(false)}
+                  >
+                    <UserPlus className="h-4 w-4 text-primary" />
+                    Sign Up
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {/* Try Demo */}
             <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost">Sign In</Button>
-            </a>
-            <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer">
-              <Button>Get Started</Button>
+              <Button className="gap-2">
+                <Play className="h-3.5 w-3.5 fill-current" />
+                Try Demo
+              </Button>
             </a>
           </div>
 
@@ -463,13 +519,31 @@ export function Navbar() {
               <div className="col-span-2">
                 <ManualModal compact triggerClassName="w-full justify-center" />
               </div>
-              <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button variant="ghost" className="w-full">
+              <div className="col-span-2 grid grid-cols-2 gap-2 rounded-xl border border-border overflow-hidden">
+                <a
+                  href="https://sparkletimekeeping.com/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors border-r border-border"
+                >
+                  <LogIn className="h-4 w-4 text-primary" />
                   Sign In
-                </Button>
-              </a>
+                </a>
+                <a
+                  href="https://sparkletimekeeping.com/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <UserPlus className="h-4 w-4 text-primary" />
+                  Sign Up
+                </a>
+              </div>
               <a href="https://sparkletimekeeping.com/login" target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button className="w-full">Get Started</Button>
+                <Button className="w-full gap-2">
+                  <Play className="h-3.5 w-3.5 fill-current" />
+                  Try Demo
+                </Button>
               </a>
             </div>
           </div>
